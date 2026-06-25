@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { BookOpen, RotateCcw, X } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { BookOpen, RotateCcw, X, Zap, TrendingUp, Scale } from "lucide-react";
 import { StationLayout } from "../StationLayout";
 import { TimeCard } from "../TimeCard";
 import { ControlSlider } from "../ControlSlider";
@@ -14,109 +15,125 @@ import {
 
 const DEFAULT: SurplusInput = { totalHours: 8, productivity: 100, realWage: 100 };
 
-// Popup lý thuyết gốc (3.1.2)
 function TheoryPopup({ onClose }: { onClose: () => void }) {
   return (
-    <div
-      className="absolute inset-0 z-30 flex items-center justify-center"
-      style={{ background: "color-mix(in srgb, var(--ink) 90%, transparent)" }}
+    <motion.div
+      className="absolute inset-0 z-30 flex items-center justify-center p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{ background: "color-mix(in srgb, var(--ink) 92%, transparent)" }}
       onClick={onClose}
     >
-      <div
-        className="card-paper w-[540px] p-7"
+      <motion.div
+        className="card-paper w-full max-w-[480px] p-5 sm:p-6 relative overflow-hidden"
+        initial={{ scale: 0.9, y: 20, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.9, y: 20, opacity: 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="mb-4 flex items-center justify-between">
-          <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 24, color: "var(--ink)" }}>
+        <motion.button 
+          onClick={onClose} 
+          className="focus-amber absolute top-2 right-2 sm:top-3 sm:right-3 z-10 cursor-pointer"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          style={{ color: "var(--surplus-red)" }}
+        >
+          <X size={18} />
+        </motion.button>
+
+        <div className="mb-3 sm:mb-4 flex items-center gap-2">
+          <BookOpen size={16} className="sm:w-[18px] sm:h-[18px]" style={{ color: "var(--amber-signal)" }} />
+          <span style={{ 
+            fontFamily: "var(--font-display)", 
+            fontWeight: 800, 
+            fontSize: 16, 
+            sm: 18, 
+            color: "var(--ink)",
+          }}>
             LÝ THUYẾT GỐC — 3.1.2
           </span>
-          <button onClick={onClose} className="focus-amber" style={{ color: "var(--surplus-red)", cursor: "pointer" }}>
-            <X size={20} />
-          </button>
         </div>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: 15, color: "var(--ink)", lineHeight: 1.65, marginBottom: 16 }}>
-          Giá trị thặng dư là phần giá trị mới do lao động tạo ra vượt quá giá trị sức
-          lao động được trả bằng tiền lương. Nhà tư bản mua sức lao động như một hàng hóa
-          đặc biệt — khi sử dụng trong sản xuất, sức lao động tạo ra lượng giá trị lớn
-          hơn chính giá trị của nó.
+
+        <p style={{ 
+          fontFamily: "var(--font-body)", 
+          fontSize: 12, 
+          sm: 13, 
+          color: "var(--ink)", 
+          lineHeight: 1.6, 
+          marginBottom: 12,
+        }}>
+          Giá trị thặng dư là phần giá trị mới do lao động tạo ra vượt quá giá trị sức lao động được trả bằng tiền lương.
         </p>
+
         <div
-          className="mb-4 p-4"
-          style={{ background: "var(--ink)", borderRadius: 4, border: "1px solid var(--grid-line)" }}
+          className="p-3 sm:p-4 relative"
+          style={{ 
+            background: "var(--ink)", 
+            borderRadius: 6, 
+            border: "1px solid var(--grid-line)",
+          }}
         >
-          {[
-            "Ngày lao động:   t = t₁ + t₂",
-            "t₁ — lao động cần thiết (phần được trả công)",
-            "t₂ — lao động thặng dư (phần bị chiếm đoạt)",
-            "",
-            "Tỷ suất giá trị thặng dư:",
-            "s/v = t₂ / t₁ × 100%",
-          ].map((line, i) =>
-            line === "" ? (
-              <div key={i} style={{ height: 8 }} />
-            ) : (
-              <div
-                key={i}
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 14,
-                  color: line.startsWith("s/v") || line.startsWith("Tỷ suất") ? "var(--amber-signal)" : "var(--paper)",
-                  lineHeight: 1.7,
-                }}
-              >
-                {line}
-              </div>
-            )
-          )}
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(12px, 1.8vw, 13px)", color: "var(--paper)", lineHeight: 1.8 }}>
+            <div>Ngày lao động: <span style={{ color: "var(--amber-signal)" }}>t = t₁ + t₂</span></div>
+            <div style={{ fontSize: "clamp(10px, 1.8vw, 11px)", opacity: 0.7 }}>t₁ — lao động cần thiết · t₂ — lao động thặng dư</div>
+            <div style={{ marginTop: 8 }}>Tỷ suất: <span style={{ color: "var(--amber-signal)" }}>s/v = t₂ / t₁ × 100%</span></div>
+          </div>
         </div>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "color-mix(in srgb, var(--ink) 65%, transparent)" }}>
-          Nguồn: Tài liệu PDF nhóm cung cấp [★]
-        </p>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
-// Card phân biệt 2 phương pháp (3.1.3)
 function MethodCompareCard() {
   const rows = [
-    {
-      method: "Giá trị thặng dư tuyệt đối",
-      mechanism: "Kéo dài ngày lao động hoặc tăng cường độ",
-      web: "Slider giờ làm tăng → phần đỏ t₂ dài ra, t₁ không đổi",
-      color: "var(--surplus-red)",
-    },
-    {
-      method: "Giá trị thặng dư tương đối",
-      mechanism: "Tăng năng suất → rút ngắn thời gian lao động cần thiết t₁",
-      web: "Slider năng suất tăng → phần xanh t₁ ngắn lại, phần đỏ t₂ dài ra",
-      color: "var(--necessary-teal)",
-    },
+    { method: "Tuyệt đối", mechanism: "Kéo dài ngày lao động", color: "var(--surplus-red)", icon: Scale },
+    { method: "Tương đối", mechanism: "Tăng năng suất → rút ngắn t₁", color: "var(--necessary-teal)", icon: TrendingUp },
   ];
 
   return (
-    <div className="card-industrial p-4">
-      <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: "0.1em", color: "var(--amber-signal)", marginBottom: 10 }}>
-        PHÂN BIỆT 2 PHƯƠNG PHÁP — 3.1.3
+    <div className="card-industrial p-3 sm:p-4">
+      <div style={{ 
+        fontFamily: "var(--font-mono)", 
+        fontSize: 9, 
+        sm: 10, 
+        letterSpacing: "0.1em", 
+        color: "var(--amber-signal)", 
+        marginBottom: 10,
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}>
+        <Zap size={11} className="sm:w-3 sm:h-3" />
+        2 PHƯƠNG PHÁP — 3.1.3
       </div>
-      <div className="flex flex-col gap-3">
-        {rows.map((r) => (
-          <div
-            key={r.method}
-            className="p-3"
-            style={{ borderLeft: `3px solid ${r.color}`, background: "color-mix(in srgb, var(--ink) 60%, transparent)", borderRadius: "0 4px 4px 0" }}
-          >
-            <div style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: 13, color: r.color, marginBottom: 2 }}>
-              {r.method}
+
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+        {rows.map((r) => {
+          const Icon = r.icon;
+          return (
+            <div
+              key={r.method}
+              className="flex-1 p-2.5 sm:p-3"
+              style={{ 
+                borderLeft: `3px solid ${r.color}`, 
+                background: "color-mix(in srgb, var(--ink) 60%, transparent)", 
+                borderRadius: "0 4px 4px 0",
+              }}
+            >
+              <div className="flex items-center gap-1.5 sm:gap-2 mb-1">
+                <Icon size={12} className="sm:w-3.5 sm:h-3.5" style={{ color: r.color }} />
+                <span style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "clamp(11px, 1.8vw, 12px)", color: r.color }}>
+                  {r.method}
+                </span>
+              </div>
+              <div style={{ fontFamily: "var(--font-body)", fontSize: "clamp(10px, 1.8vw, 11px)", color: "var(--paper)", lineHeight: 1.4 }}>
+                {r.mechanism}
+              </div>
             </div>
-            <div style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "var(--paper)", lineHeight: 1.45 }}>
-              {r.mechanism}
-            </div>
-            <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "color-mix(in srgb, var(--paper) 60%, transparent)", marginTop: 3 }}>
-              → {r.web}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
@@ -151,35 +168,54 @@ export function Station01({ resetTick }: { resetTick: number }) {
 
   return (
     <StationLayout stationCode="TRẠM 01" title="CỖ MÁY GIÁ TRỊ THẶNG DƯ" subtitle="Mô phỏng công thức — tính từ thông số bạn nhập">
-      <div className="grid h-full grid-cols-12 gap-6">
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        style={{
+          background: "radial-gradient(ellipse at 30% 60%, rgba(227, 162, 60, 0.05) 0%, transparent 50%)",
+        }}
+      />
+
+      <div className="grid min-h-full grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 lg:gap-6 relative z-10">
         {/* left: time card + formula + badge */}
-        <div className="col-span-7 flex flex-col justify-center gap-4">
-          <div className="flex items-center gap-3">
+        <div className="flex min-h-[560px] flex-col justify-center gap-3 sm:gap-4 lg:col-span-7 lg:min-h-0">
+          {/* Formula and theory button row */}
+          <div className="flex items-center gap-2">
             <FormulaBox lines={["t = t₁ + t₂", "s/v = t₂ / t₁ × 100%"]} />
             <button
               onClick={() => setShowTheory(true)}
-              className="svl-press focus-amber flex items-center gap-2 px-4 py-2"
+              className="svl-press focus-amber flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 cursor-pointer"
               style={{
-                fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: "0.06em",
-                color: "var(--amber-signal)", border: "1px solid var(--amber-signal)",
-                borderRadius: 4, cursor: "pointer",
+                fontFamily: "var(--font-mono)", 
+                fontSize: "clamp(11px, 3vw, 12px)", 
+                letterSpacing: "0.04em",
+                color: "var(--amber-signal)", 
+                border: "1px solid var(--amber-signal)",
+                borderRadius: 4,
+                background: "rgba(227, 162, 60, 0.1)",
               }}
             >
-              <BookOpen size={14} /> LÝ THUYẾT
+              <BookOpen size={12} className="sm:w-[13px] sm:h-[13px]" />
+              <span className="hidden sm:inline">LÝ THUYẾT</span>
             </button>
           </div>
+
           <TimeCard
             totalHours={state.totalHours}
             necessaryHours={out.necessaryHours}
             surplusHours={out.surplusHours}
             rate={out.rate}
           />
+
           <MechanismBadge mechanism={mechanism} />
+
           <MethodCompareCard />
         </div>
 
         {/* right: sliders */}
-        <div className="col-span-5 flex flex-col justify-center gap-4">
+        <div className="flex min-h-[420px] flex-col justify-center gap-3 sm:gap-4 lg:col-span-5 lg:min-h-0">
           <ControlSlider
             label="Giờ làm / ngày"
             value={state.totalHours}
@@ -212,15 +248,24 @@ export function Station01({ resetTick }: { resetTick: number }) {
           />
           <button
             onClick={() => { setState(DEFAULT); setMechanism("baseline"); prevRef.current = DEFAULT; }}
-            className="svl-press focus-amber mt-1 flex w-fit items-center gap-2 px-4 py-2"
-            style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--paper)", border: "1px solid var(--grid-line)", borderRadius: 4, cursor: "pointer" }}
+            className="svl-press focus-amber flex w-fit items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 cursor-pointer"
+            style={{ 
+              fontFamily: "var(--font-mono)", 
+              fontSize: "clamp(11px, 3vw, 12px)", 
+              color: "var(--paper)", 
+              border: "1px solid var(--grid-line)", 
+              borderRadius: 4 
+            }}
           >
-            <RotateCcw size={15} /> Đặt lại (R)
+            <RotateCcw size={12} className="sm:w-[13px] sm:h-[13px]" /> 
+            Đặt lại (R)
           </button>
         </div>
       </div>
 
-      {showTheory && <TheoryPopup onClose={() => setShowTheory(false)} />}
+      <AnimatePresence>
+        {showTheory && <TheoryPopup onClose={() => setShowTheory(false)} />}
+      </AnimatePresence>
     </StationLayout>
   );
 }

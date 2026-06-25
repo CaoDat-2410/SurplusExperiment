@@ -30,9 +30,9 @@ export function Station03({ resetTick }: { resetTick: number }) {
 
   return (
     <StationLayout stationCode="TRẠM 03" title="VIỆT NAM: NHÀ MÁY ĐANG THAY ĐỔI" subtitle="Kéo slider tự động hóa 0 → 100 · bấm số nguồn để xem chi tiết">
-      <div className="grid h-full grid-cols-12 gap-6">
-        <div className="col-span-7 flex flex-col gap-4">
-          <div className="min-h-0 flex-1">
+      <div className="grid min-h-full grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 lg:gap-6">
+        <div className="order-1 flex min-h-[520px] flex-col gap-3 sm:min-h-[560px] sm:gap-4 lg:col-span-7 lg:min-h-0 lg:order-1">
+          <div className="min-h-[390px] flex-1 sm:min-h-[430px] lg:min-h-0">
             <FactoryBlueprint automationLevel={automation} />
           </div>
           <ControlSlider
@@ -47,7 +47,7 @@ export function Station03({ resetTick }: { resetTick: number }) {
           />
         </div>
 
-        <div className="col-span-5 grid grid-cols-2 grid-rows-3 gap-3">
+        <div className="order-2 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3 lg:col-span-5 lg:grid-rows-3 lg:order-2">
           <EvidenceCard eyebrow={`CHI PHÍ LAO ĐỘNG · ${mv.labourCost.year}`}
             sourceId={wbId} sourceMarker={m(wbId)} onOpenSource={setOpenSource} color="teal">
             <Stat value={`${mv.labourCost.value}`} unit={mv.labourCost.unit} note={mv.labourCost.note} />
@@ -76,7 +76,7 @@ export function Station03({ resetTick }: { resetTick: number }) {
             sourceId={wbId} sourceMarker={m(wbId)} onOpenSource={setOpenSource} color="amber">
             <Stat
               value={`+${r.automationEffect.employmentGrowth}% / +${r.automationEffect.incomeGrowth}%`}
-              unit="việc làm / thu nhập"
+              unit="việc / thu nhập"
               note={`Lợi ích ${r.automationEffect.beneficiaries}.`}
             />
           </EvidenceCard>
@@ -96,9 +96,9 @@ export function Station03({ resetTick }: { resetTick: number }) {
 function Stat({ value, unit, note }: { value: string; unit: string; note?: string }) {
   return (
     <div className="flex h-full flex-col justify-center">
-      <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 30, lineHeight: 1, color: "var(--paper)" }}>{value}</div>
-      <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "color-mix(in srgb, var(--paper) 60%, transparent)" }}>{unit}</div>
-      {note && <div style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "color-mix(in srgb, var(--paper) 70%, transparent)", marginTop: 4 }}>{note}</div>}
+      <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(20px, 4vw, 30px)", lineHeight: 1, color: "var(--paper)" }}>{value}</div>
+      <div style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(10px, 1.8vw, 11px)", color: "color-mix(in srgb, var(--paper) 60%, transparent)" }}>{unit}</div>
+      {note && <div style={{ fontFamily: "var(--font-body)", fontSize: "clamp(9px, 1.8vw, 11px)", color: "color-mix(in srgb, var(--paper) 70%, transparent)", marginTop: 4, lineHeight: 1.3 }}>{note}</div>}
     </div>
   );
 }

@@ -297,6 +297,90 @@
   outline-offset: 2px;
 }
 
+/* Policy indicator card — enhanced for readability */
+.policy-indicator {
+  border: 1px solid var(--grid-line);
+  border-left: 3px solid var(--grid-line);
+  border-radius: 4px;
+  background: rgba(236, 227, 211, 0.04);
+  padding: 12px 14px;
+  transition: transform 150ms ease, border-left-color 150ms ease, background 150ms ease;
+}
+.policy-indicator:hover {
+  transform: translateX(4px);
+  border-left-color: var(--amber-signal);
+  background: rgba(227, 162, 60, 0.08);
+}
+
+/* ── Station04 Visual Effects ── */
+
+/* Symbol glow effect for ≠ */
+.symbol-glow {
+  transition: text-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* Reveal block container */
+.reveal-block {
+  position: relative;
+}
+
+/* Subtle underline animation on reveal */
+.reveal-block::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--amber-signal), transparent);
+  transition: width 0.4s ease;
+}
+
+/* Method cards wrapper glow */
+.method-cards-wrapper {
+  position: relative;
+}
+
+.method-cards-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  border-radius: 8px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(227, 162, 60, 0.3), transparent, rgba(227, 162, 60, 0.1));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.method-cards-wrapper:hover::before {
+  opacity: 1;
+}
+
+/* Pulse animation for highlighted elements */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(227, 162, 60, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(227, 162, 60, 0.6); }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Floating animation for ambient effects */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .svl-scan::after { animation: none; }
 }

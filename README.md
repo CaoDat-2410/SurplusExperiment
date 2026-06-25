@@ -1,7 +1,7 @@
 
-  # Create a project plan
+  # Surplus Experiment
 
-  This is a code bundle for Create a project plan. The original project is available at https://www.figma.com/design/Doe9T8hNMHh6H9UFYB4hKz/Create-a-project-plan.
+  This is a code bundle for Surplus Experiment. The original project is available at https://www.figma.com/design/Doe9T8hNMHh6H9UFYB4hKz/Surplus-Experiment.
 
   ## Running the code
 

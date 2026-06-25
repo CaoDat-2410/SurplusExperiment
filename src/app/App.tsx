@@ -74,21 +74,22 @@ export default function App() {
   };
 
   return (
-    <div className="grid-bg relative flex h-screen w-full flex-col overflow-hidden" {...swipe}>
-      <div className="absolute right-4 top-4 z-30 flex gap-2">
+    <div className="grid-bg relative flex h-dvh w-full flex-col overflow-hidden" {...swipe}>
+      {/* Top buttons */}
+      <div className="absolute right-2 sm:right-4 top-2 sm:top-4 z-30 flex gap-1 sm:gap-2">
         {[
           { icon: BookOpen, fn: () => goTo(6), label: "Minh bạch AI & nguồn" },
           { icon: Maximize, fn: toggleFullscreen, label: "Toàn màn hình (F)" },
           { icon: HelpCircle, fn: () => setHelp(true), label: "Trợ giúp (H)" },
         ].map(({ icon: Icon, fn, label }) => (
-          <button key={label} onClick={fn} title={label} className="svl-press focus-amber p-2"
+          <button key={label} onClick={fn} title={label} className="svl-press focus-amber p-1.5 sm:p-2"
             style={{ color: "var(--paper)", border: "1px solid var(--grid-line)", borderRadius: 4, background: "color-mix(in srgb, var(--ink) 80%, transparent)", cursor: "pointer" }}>
-            <Icon size={18} />
+            <Icon size={16} className="sm:w-[18px] sm:h-[18px]" />
           </button>
         ))}
       </div>
 
-      <div className="svl-scan relative min-h-0 flex-1 overflow-hidden">
+      <div className="svl-scan relative min-h-0 flex-1 overflow-y-auto">
         <AnimatePresence mode="wait" custom={dir}>
           <motion.div
             key={active}
@@ -107,15 +108,15 @@ export default function App() {
       <BottomNav stations={NAV} current={active} onNavigate={goTo} />
 
       {help && (
-        <div className="absolute inset-0 z-40 flex items-center justify-center"
+        <div className="absolute inset-0 z-40 flex items-center justify-center p-4"
           style={{ background: "color-mix(in srgb, var(--ink) 92%, transparent)" }}
           onClick={() => setHelp(false)}>
-          <div className="card-paper w-96 p-6" onClick={(e) => e.stopPropagation()}>
+          <div className="card-paper w-full max-w-sm sm:max-w-md p-4 sm:p-6" onClick={(e) => e.stopPropagation()}>
             <div className="mb-3 flex items-center justify-between">
-              <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 26, color: "var(--ink)" }}>Điều khiển</span>
-              <button onClick={() => setHelp(false)} className="focus-amber" style={{ color: "var(--surplus-red)", cursor: "pointer" }}><X size={20} /></button>
+              <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(20px, 1.8vw, 26px)", color: "var(--ink)" }}>Điều khiển</span>
+              <button onClick={() => setHelp(false)} className="focus-amber" style={{ color: "var(--surplus-red)", cursor: "pointer" }}><X size={18} /></button>
             </div>
-            <ul style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--ink)", lineHeight: 2 }}>
+            <ul style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(12px, 1.8vw, 13px)", color: "var(--ink)", lineHeight: 1.8 }}>
               <li>← → — chuyển trạm</li>
               <li>Space / Enter — hiện nội dung tiếp theo</li>
               <li>R — đặt lại trạm hiện tại</li>

@@ -21,19 +21,19 @@ export function FactoryBlueprint({ automationLevel }: FactoryBlueprintProps) {
         : "Giá trị thặng dư tương đối qua tự động hóa";
 
   return (
-    <div className="card-industrial relative h-full p-5">
-      <div className="mb-3 flex items-center justify-between">
-        <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--paper)" }}>SƠ ĐỒ NHÀ MÁY</span>
-        <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--amber-signal)" }}>{label}</span>
+    <div className="card-industrial relative h-full p-4 sm:p-5">
+      <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+        <span style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(12px, 3.2vw, 14px)", color: "var(--paper)" }}>SƠ ĐỒ NHÀ MÁY</span>
+        <span style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(12px, 3.1vw, 14px)", color: "var(--amber-signal)" }}>{label}</span>
       </div>
 
-      <div className="grid h-[calc(100%-2rem)] grid-cols-3 gap-4">
+      <div className="grid min-h-[calc(100%-3rem)] grid-cols-3 gap-3 sm:gap-4">
         {/* low skill */}
         <div className="flex flex-col">
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--necessary-teal)", marginBottom: 6 }}>
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(11px, 2.7vw, 13px)", color: "var(--necessary-teal)", marginBottom: 8 }}>
             LAO ĐỘNG KỸ NĂNG THẤP
           </div>
-          <div className="grid grid-cols-4 gap-2" style={{ opacity: lowSkillOpacity, transition: "opacity 150ms linear" }}>
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-2.5" style={{ opacity: lowSkillOpacity, transition: "opacity 150ms linear" }}>
             {Array.from({ length: 12 }).map((_, i) => (
               <div
                 key={i}
@@ -44,12 +44,12 @@ export function FactoryBlueprint({ automationLevel }: FactoryBlueprintProps) {
                   borderRadius: 2,
                 }}
               >
-                <User size={14} style={{ color: "var(--paper)" }} />
+                <User size={18} className="sm:size-5" style={{ color: "var(--paper)" }} />
               </div>
             ))}
           </div>
           {lowSkillWarning && (
-            <div className="mt-2 flex items-center gap-1" style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--surplus-red)" }}>
+            <div className="mt-2 flex items-center gap-1" style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(11px, 2.6vw, 13px)", color: "var(--surplus-red)" }}>
               <AlertTriangle size={13} /> Rủi ro mất việc / phi chính thức
             </div>
           )}
@@ -57,17 +57,17 @@ export function FactoryBlueprint({ automationLevel }: FactoryBlueprintProps) {
 
         {/* high skill */}
         <div className="flex flex-col">
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--amber-signal)", marginBottom: 6 }}>
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(11px, 2.7vw, 13px)", color: "var(--amber-signal)", marginBottom: 8 }}>
             LAO ĐỘNG KỸ NĂNG CAO
           </div>
-          <div className="grid grid-cols-4 gap-2" style={{ opacity: highSkillOpacity, transition: "opacity 150ms linear" }}>
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-2.5" style={{ opacity: highSkillOpacity, transition: "opacity 150ms linear" }}>
             {Array.from({ length: 6 }).map((_, i) => (
               <div
                 key={i}
                 className="flex aspect-square items-center justify-center"
                 style={{ background: "color-mix(in srgb, var(--amber-signal) 35%, var(--ink))", border: "1px solid var(--amber-signal)", borderRadius: 2 }}
               >
-                <User size={14} style={{ color: "var(--paper)" }} />
+                <User size={18} className="sm:size-5" style={{ color: "var(--paper)" }} />
               </div>
             ))}
           </div>
@@ -75,8 +75,8 @@ export function FactoryBlueprint({ automationLevel }: FactoryBlueprintProps) {
 
         {/* robots */}
         <div className="flex flex-col">
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--paper)", marginBottom: 6 }}>ROBOT</div>
-          <div className="grid grid-cols-4 gap-2">
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(11px, 2.7vw, 13px)", color: "var(--paper)", marginBottom: 8 }}>ROBOT</div>
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-2.5">
             {Array.from({ length: 8 }).map((_, i) => (
               <div
                 key={i}
@@ -89,7 +89,7 @@ export function FactoryBlueprint({ automationLevel }: FactoryBlueprintProps) {
                   transition: "opacity 150ms linear",
                 }}
               >
-                <Bot size={14} style={{ color: i < robotCount ? "var(--amber-signal)" : "var(--grid-line)" }} />
+                <Bot size={18} className="sm:size-5" style={{ color: i < robotCount ? "var(--amber-signal)" : "var(--grid-line)" }} />
               </div>
             ))}
           </div>
