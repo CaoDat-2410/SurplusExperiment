@@ -20,7 +20,7 @@ export function Station03({ resetTick }: { resetTick: number }) {
   }, [resetTick]);
 
   const relativeSection = theoryContent.find((s) => s.type === "relative")!;
-  const [pwcCase] = relativeSection.caseStudies;
+  const [metric1] = relativeSection.metrics; // PwC 2025
 
   return (
     <StationLayout stationCode="TRẠM 03" title={relativeSection.title} subtitle="Kéo slider tự động hóa 0 → 100 · bấm số nguồn để xem chi tiết">
@@ -36,48 +36,48 @@ export function Station03({ resetTick }: { resetTick: number }) {
             max={100}
             step={1}
             unit="%"
-            description="Tự động hóa bằng AI giúp tăng năng suất vượt bậc, tái cấu trúc thời gian lao động."
+            description="Tăng năng suất lao động xã hội để rút ngắn thời gian lao động cần thiết."
             onChange={setAutomation}
           />
         </div>
 
         <div className="col-span-5 grid grid-cols-2 grid-rows-3 gap-3">
-          <EvidenceCard eyebrow="NĂNG SUẤT AI TRUNG BÌNH"
-            sourceId={pwcCase.id} sourceMarker={cite(pwcCase.id)} onOpenSource={setOpenSource} color="teal">
-            <Stat value="+40%" unit="Năng suất trung bình" note="Của các doanh nghiệp ứng dụng Generative AI" />
+          <EvidenceCard eyebrow={metric1.label.toUpperCase()}
+            sourceId="pwc-2025" sourceMarker={cite("pwc-2025")} onOpenSource={setOpenSource} color="teal">
+            <Stat value={metric1.value} unit={metric1.description} note="Ứng dụng trợ lý ảo (GitHub Copilot) viết code." />
           </EvidenceCard>
 
-          <EvidenceCard eyebrow="NĂNG SUẤT AI XUẤT SẮC"
-            sourceId={pwcCase.id} sourceMarker={cite(pwcCase.id)} onOpenSource={setOpenSource} color="amber">
-            <Stat
-              value="+163%"
-              unit="Doanh nghiệp xuất sắc nhất"
-              note="Top 20% doanh nghiệp đạt mức tăng trưởng vượt trội"
-            />
-          </EvidenceCard>
-
-          <EvidenceCard eyebrow="TÍCH HỢP TRỢ LÝ ẢO"
-            sourceId={pwcCase.id} sourceMarker={cite(pwcCase.id)} onOpenSource={setOpenSource} color="paper">
-            <Stat value="Copilot" unit="Hỗ trợ lập trình viên" note="Giúp viết hàng ngàn dòng code chỉ bằng các câu prompt" />
-          </EvidenceCard>
-
-          <EvidenceCard eyebrow="THỜI GIAN LÀ LAO ĐỘNG CẦN THIẾT"
-            sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="red">
-            <Stat value="Giảm t₁" unit="Thời gian tất yếu rút ngắn" note="Thời gian hoàn thành các module phần mềm giảm xuống" />
-          </EvidenceCard>
-
-          <EvidenceCard eyebrow="THỜI GIAN LAO ĐỘNG THẶNG DƯ"
+          <EvidenceCard eyebrow="CƠ CHẾ LÝ THUYẾT"
             sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="amber">
             <Stat
-              value="Tăng t₂"
-              unit="Mở rộng thặng dư giới chủ"
-              note="Phần thời gian thặng dư làm lợi cho giới chủ công nghệ kéo dài"
+              value="Thặng dư"
+              unit="Tương đối"
+              note={relativeSection.shortConcept}
             />
           </EvidenceCard>
 
-          <EvidenceCard eyebrow="ĐỘ DÀI NGÀY LAO ĐỘNG"
+          <EvidenceCard eyebrow="CÔNG THỨC TOÁN HỌC"
+            sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="paper">
+            <Stat value="Formula" unit={relativeSection.formula} note="Rút ngắn thời gian lao động cần thiết t, kéo dài t'." />
+          </EvidenceCard>
+
+          <EvidenceCard eyebrow="LĐ CẦN THIẾT (t)"
             sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="red">
-            <Stat value="8 Giờ" unit="Không thay đổi độ dài ngày" note="Đặc trưng cốt lõi của sản xuất thặng dư tương đối" />
+            <Stat value="Giảm t" unit="Rút ngắn thời gian" note="Giá trị sức lao động giảm do giá trị tư liệu sinh hoạt giảm." />
+          </EvidenceCard>
+
+          <EvidenceCard eyebrow="LĐ THẶNG DƯ (t')"
+            sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="amber">
+            <Stat
+              value="Tăng t'"
+              unit="Mở rộng thặng dư"
+              note="Tăng phần giá trị thặng dư giới chủ tư bản chiếm đoạt không công."
+            />
+          </EvidenceCard>
+
+          <EvidenceCard eyebrow="ĐỘ DÀI NGÀY LÀM VIỆC"
+            sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="red">
+            <Stat value="Cố định" unit="Ngày làm việc không đổi" note="Phương pháp thực hiện mà không cần kéo dài ngày lao động." />
           </EvidenceCard>
         </div>
       </div>
@@ -90,9 +90,9 @@ export function Station03({ resetTick }: { resetTick: number }) {
 function Stat({ value, unit, note }: { value: string; unit: string; note?: string }) {
   return (
     <div className="flex h-full flex-col justify-center">
-      <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 30, lineHeight: 1, color: "var(--paper)" }}>{value}</div>
-      <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "color-mix(in srgb, var(--paper) 60%, transparent)" }}>{unit}</div>
-      {note && <div style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "color-mix(in srgb, var(--paper) 70%, transparent)", marginTop: 4 }}>{note}</div>}
+      <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 24, lineHeight: 1.1, color: "var(--paper)" }}>{value}</div>
+      <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "color-mix(in srgb, var(--paper) 60%, transparent)", marginTop: 2 }}>{unit}</div>
+      {note && <div style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "color-mix(in srgb, var(--paper) 70%, transparent)", marginTop: 4, lineHeight: 1.3 }}>{note}</div>}
     </div>
   );
 }

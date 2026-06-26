@@ -5,17 +5,16 @@ import { TimeCard } from "../TimeCard";
 import { ControlSlider } from "../ControlSlider";
 import { FormulaBox } from "../FormulaBox";
 import { MechanismBadge } from "../MechanismBadge";
+import { Odometer } from "../effects/Odometer";
 import {
   calculateSurplus,
   getActiveMechanism,
   Mechanism,
   SurplusInput,
 } from "../lib/calculations";
-
 import { theoryContent } from "../data/theoryContent";
 
 const essenceSection = theoryContent.find((s) => s.type === "essence")!;
-
 const DEFAULT: SurplusInput = { totalHours: 8, productivity: 100, realWage: 100 };
 
 // Popup lý thuyết gốc (3.1.2)
@@ -39,7 +38,7 @@ function TheoryPopup({ onClose }: { onClose: () => void }) {
           </button>
         </div>
         <p style={{ fontFamily: "var(--font-body)", fontSize: 15, color: "var(--ink)", lineHeight: 1.65, marginBottom: 16 }}>
-          {essenceSection.concept}
+          {essenceSection.shortConcept}
         </p>
         <div
           className="mb-4 p-4"
@@ -50,8 +49,8 @@ function TheoryPopup({ onClose }: { onClose: () => void }) {
             "t₁ — lao động cần thiết (phần được trả công)",
             "t₂ — lao động thặng dư (phần bị chiếm đoạt)",
             "",
-            "Tỷ suất giá trị thặng dư:",
-            "s/v = t₂ / t₁ × 100%",
+            "Công thức tỷ suất thặng dư:",
+            essenceSection.formula,
           ].map((line, i) =>
             line === "" ? (
               <div key={i} style={{ height: 8 }} />
@@ -61,7 +60,7 @@ function TheoryPopup({ onClose }: { onClose: () => void }) {
                 style={{
                   fontFamily: "var(--font-mono)",
                   fontSize: 14,
-                  color: line.startsWith("s/v") || line.startsWith("Tỷ suất") ? "var(--amber-signal)" : "var(--paper)",
+                  color: line.includes("=") || line.startsWith("Công thức") ? "var(--amber-signal)" : "var(--paper)",
                   lineHeight: 1.7,
                 }}
               >
@@ -78,46 +77,44 @@ function TheoryPopup({ onClose }: { onClose: () => void }) {
   );
 }
 
-// Card phân biệt 2 phương pháp (3.1.3)
-function MethodCompareCard() {
-  const rows = [
-    {
-      method: "Giá trị thặng dư tuyệt đối",
-      mechanism: "Kéo dài ngày lao động hoặc tăng cường độ",
-      web: "Slider giờ làm tăng → phần đỏ t₂ dài ra, t₁ không đổi",
-      color: "var(--surplus-red)",
-    },
-    {
-      method: "Giá trị thặng dư tương đối",
-      mechanism: "Tăng năng suất → rút ngắn thời gian lao động cần thiết t₁",
-      web: "Slider năng suất tăng → phần xanh t₁ ngắn lại, phần đỏ t₂ dài ra",
-      color: "var(--necessary-teal)",
-    },
-  ];
+// Card hiển thị các chỉ số thực tế
+function EssenceMetricsCard() {
+  const [metric1, metric2] = essenceSection.metrics;
 
   return (
     <div className="card-industrial p-4">
       <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: "0.1em", color: "var(--amber-signal)", marginBottom: 10 }}>
-        PHÂN BIỆT 2 PHƯƠNG PHÁP — 3.1.3
+        SỐ LIỆU ĐO LƯỜNG CỐT LÕI
       </div>
-      <div className="flex flex-col gap-3">
-        {rows.map((r) => (
-          <div
-            key={r.method}
-            className="p-3"
-            style={{ borderLeft: `3px solid ${r.color}`, background: "color-mix(in srgb, var(--ink) 60%, transparent)", borderRadius: "0 4px 4px 0" }}
-          >
-            <div style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: 13, color: r.color, marginBottom: 2 }}>
-              {r.method}
-            </div>
-            <div style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "var(--paper)", lineHeight: 1.45 }}>
-              {r.mechanism}
-            </div>
-            <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "color-mix(in srgb, var(--paper) 60%, transparent)", marginTop: 3 }}>
-              → {r.web}
-            </div>
+      <div className="grid grid-cols-2 gap-4">
+        {/* Metric 1: Oxfam 2024 */}
+        <div className="p-3" style={{ borderLeft: "3px solid var(--surplus-red)", background: "color-mix(in srgb, var(--ink) 60%, transparent)", borderRadius: "0 4px 4px 0" }}>
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--grid-line)" }}>
+            {metric1.label}
           </div>
-        ))}
+          <div className="my-1 flex items-baseline" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 32, color: "var(--surplus-red)" }}>
+            <span>+$</span>
+            <Odometer value={2} decimals={0} />
+            <span style={{ fontSize: 16, marginLeft: 2 }}>Trillion</span>
+          </div>
+          <div style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "var(--paper)", lineHeight: 1.45 }}>
+            {metric1.description}
+          </div>
+        </div>
+
+        {/* Metric 2: Bloomberg 2026 */}
+        <div className="p-3" style={{ borderLeft: "3px solid var(--necessary-teal)", background: "color-mix(in srgb, var(--ink) 60%, transparent)", borderRadius: "0 4px 4px 0" }}>
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--grid-line)" }}>
+            {metric2.label}
+          </div>
+          <div className="my-1 flex items-baseline" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 32, color: "var(--necessary-teal)" }}>
+            <Odometer value={14.5} decimals={1} />
+            <span style={{ fontSize: 20, marginLeft: 2 }}>%</span>
+          </div>
+          <div style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "var(--paper)", lineHeight: 1.45 }}>
+            {metric2.description}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -156,7 +153,7 @@ export function Station01({ resetTick }: { resetTick: number }) {
         {/* left: time card + formula + badge */}
         <div className="col-span-7 flex flex-col justify-center gap-4">
           <div className="flex items-center gap-3">
-            <FormulaBox lines={["t = t₁ + t₂", "s/v = t₂ / t₁ × 100%"]} />
+            <FormulaBox lines={["t = t₁ + t₂", essenceSection.formula]} />
             <button
               onClick={() => setShowTheory(true)}
               className="svl-press focus-amber flex items-center gap-2 px-4 py-2"
@@ -176,7 +173,7 @@ export function Station01({ resetTick }: { resetTick: number }) {
             rate={out.rate}
           />
           <MechanismBadge mechanism={mechanism} />
-          <MethodCompareCard />
+          <EssenceMetricsCard />
         </div>
 
         {/* right: sliders */}

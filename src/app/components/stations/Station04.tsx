@@ -3,13 +3,14 @@ import { motion } from "motion/react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { StationLayout } from "../StationLayout";
 import { useRevealStep } from "../lib/useDeck";
+import { Odometer } from "../effects/Odometer";
 import { policyIndicators, modernVariants } from "../data/theory";
 import { theoryContent } from "../data/theoryContent";
 
 const reveals = [
   ["Giá trị cá biệt hàng hóa", "<", "Giá trị xã hội hàng hóa"],
   ["Năng suất cá biệt tăng vượt trội", "→", "Đạt giá trị thặng dư siêu ngạch"],
-  ["Công nghệ đi đầu mang tính tạm thời", "nhưng", "Cạnh tranh công nghệ là phổ biến"],
+  ["Đột phá công nghệ mang tính tạm thời", "nhưng", "Cạnh tranh công nghệ là phổ biến"],
   ["AI Y sinh (Insilico Medicine):", "Rút ngắn 3-6 năm còn 18 tháng!"],
 ];
 
@@ -69,19 +70,45 @@ export function Station04({ revealTick, resetTick }: { revealTick: number; reset
             >
               {block.map((line, j) => {
                 const isConnector = line === "<" || line === "→" || line === "nhưng";
+                
+                // Custom rendering for the Insilico Medicine metrics with Odometer
+                if (i === 3 && j === 1) {
+                  return (
+                    <div
+                      key={j}
+                      className="flex items-baseline gap-1"
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontWeight: 800,
+                        fontSize: 32,
+                        lineHeight: 1.05,
+                        color: "var(--amber-signal)",
+                      }}
+                    >
+                      <span>Rút ngắn </span>
+                      <Odometer value={3} decimals={0} />
+                      <span>-</span>
+                      <Odometer value={6} decimals={0} />
+                      <span> năm còn </span>
+                      <Odometer value={18} decimals={0} />
+                      <span> tháng!</span>
+                    </div>
+                  );
+                }
+
                 return (
                   <div
                     key={j}
                     style={{
                       fontFamily: isConnector ? "var(--font-mono)" : "var(--font-display)",
                       fontWeight: 800,
-                      fontSize: isConnector ? 28 : i === 3 && j === 1 ? 40 : 30,
+                      fontSize: isConnector ? 28 : i === 3 && j === 0 ? 30 : 30,
                       lineHeight: 1.05,
                       color:
                         isConnector
                           ? "var(--surplus-red)"
-                          : i === 3 && j === 1
-                            ? "var(--amber-signal)"
+                          : i === 3 && j === 0
+                            ? "var(--paper)"
                             : "var(--paper)",
                     }}
                   >
