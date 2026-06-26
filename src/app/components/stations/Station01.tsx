@@ -87,29 +87,27 @@ function EssenceMetricsCard() {
         SỐ LIỆU ĐO LƯỜNG CỐT LÕI
       </div>
       <div className="grid grid-cols-2 gap-4">
-        {/* Metric 1: Oxfam 2024 */}
+        {/* Metric 1: Báo cáo Oxfam 2024 */}
         <div className="p-3" style={{ borderLeft: "3px solid var(--surplus-red)", background: "color-mix(in srgb, var(--ink) 60%, transparent)", borderRadius: "0 4px 4px 0" }}>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--grid-line)" }}>
             {metric1.label}
           </div>
-          <div className="my-1 flex items-baseline" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 32, color: "var(--surplus-red)" }}>
-            <span>+$</span>
-            <Odometer value={2} decimals={0} />
-            <span style={{ fontSize: 16, marginLeft: 2 }}>Trillion</span>
+          <div className="my-1 flex items-baseline" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 28, color: "var(--surplus-red)" }}>
+            <span>+</span>
+            <Odometer value={2000} decimals={0} suffix=" Tỷ USD" />
           </div>
           <div style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "var(--paper)", lineHeight: 1.45 }}>
             {metric1.description}
           </div>
         </div>
 
-        {/* Metric 2: Bloomberg 2026 */}
+        {/* Metric 2: Bloomberg Q1/2026 */}
         <div className="p-3" style={{ borderLeft: "3px solid var(--necessary-teal)", background: "color-mix(in srgb, var(--ink) 60%, transparent)", borderRadius: "0 4px 4px 0" }}>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--grid-line)" }}>
             {metric2.label}
           </div>
-          <div className="my-1 flex items-baseline" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 32, color: "var(--necessary-teal)" }}>
-            <Odometer value={14.5} decimals={1} />
-            <span style={{ fontSize: 20, marginLeft: 2 }}>%</span>
+          <div className="my-1 flex items-baseline" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 28, color: "var(--necessary-teal)" }}>
+            <Odometer value={14.5} decimals={1} suffix="%" />
           </div>
           <div style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "var(--paper)", lineHeight: 1.45 }}>
             {metric2.description}

@@ -65,7 +65,7 @@ export function Station02({ revealTick, resetTick }: { revealTick: number; reset
                     <Odometer value={10} decimals={0} />
                     <span style={{ fontSize: 24, fontWeight: 700 }}>-</span>
                     <Odometer value={12} decimals={0} />
-                    <span style={{ fontSize: 24, marginLeft: 2, fontWeight: 700 }}> hrs</span>
+                    <span style={{ fontSize: 24, marginLeft: 2, fontWeight: 700 }}> giờ/ngày</span>
                   </div>
                 ) : "—"}
               </div>
@@ -82,7 +82,7 @@ export function Station02({ revealTick, resetTick }: { revealTick: number; reset
         <Reveal show={step >= 2}>
           <EvidenceCard eyebrow="CƠ CHẾ LÝ THUYẾT" color="teal">
             <div className="flex h-full flex-col justify-center">
-              <p style={{ fontFamily: "var(--font-body)", fontSize: 15, color: "var(--paper)", lineHeight: 1.6 }}>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: 14, color: "var(--paper)", lineHeight: 1.6 }}>
                 {absoluteSection.shortConcept}
               </p>
             </div>
@@ -96,7 +96,7 @@ export function Station02({ revealTick, resetTick }: { revealTick: number; reset
                 Formula: {absoluteSection.formula}
               </div>
               <p style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "color-mix(in srgb, var(--paper) 70%, transparent)", lineHeight: 1.5 }}>
-                Bóc lột thặng dư tuyệt đối bằng cách kéo dài thời gian làm việc vượt quá thời gian tất yếu t₁ hoặc tăng cường độ lao động gián tiếp (ép burnout).
+                Bóc lột thặng dư tuyệt đối bằng cách kéo dài thời gian làm việc vượt quá thời gian tất yếu hoặc tăng cường độ lao động trong điều kiện lương khả biến không đổi.
               </p>
             </div>
           </EvidenceCard>

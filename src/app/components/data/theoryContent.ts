@@ -5,51 +5,51 @@ export const theoryContent: TheorySection[] = [
     id: "essence-section",
     type: "essence",
     title: "BẢN CHẤT CỦA GIÁ TRỊ THẶNG DƯ",
-    shortConcept: "Surplus value (m) is the value created by wage labor over and above their own labor-power value (v), appropriated by the capitalist without compensation.",
-    formula: "m' = (m / v) * 100%",
+    shortConcept: "Giá trị thặng dư (m) là bộ phận giá trị mới dôi ra ngoài giá trị sức lao động (v) do công nhân làm thuê tạo ra, bị nhà tư bản chiếm không.",
+    formula: "m' = (m / v) x 100%",
     metrics: [
       {
-        label: "Oxfam 2024",
-        value: "+$2 Trillion",
-        description: "Billionaires' wealth increase."
+        label: "Báo cáo Oxfam 2024",
+        value: "+2.000 Tỷ USD",
+        description: "Tài sản giới tỷ phú toàn cầu tăng thêm."
       },
       {
-        label: "Bloomberg 2026",
-        value: "14.5%",
-        description: "S&P 500 record profit margin."
+        label: "Bloomberg Q1/2026",
+        value: "14,5%",
+        description: "Biên lợi nhuận kỷ lục của các tập đoàn S&P 500."
       }
     ]
   },
   {
     id: "absolute-section",
     type: "absolute",
-    title: "SẢN XUẤT GIÁ TRỊ THẶNG DƯ TUYỆT ĐỐI",
-    shortConcept: "Achieved by lengthening the working day beyond the necessary labor time, while the value of labor-power remains constant.",
-    formula: "t' increases as total working day increases",
+    title: "GIÁ TRỊ THẶNG DƯ TUYỆT ĐỐI",
+    shortConcept: "Kéo dài tuyệt đối ngày lao động vượt quá thời gian lao động tất yếu, trong điều kiện năng suất lao động và giá trị sức lao động không đổi.",
+    formula: "Ngày lao động tăng = t (không đổi) + t' (tăng lên)",
     metrics: [
       {
-        label: "ISACA 2025",
+        label: "Báo cáo ISACA 2025",
         value: "73%",
-        description: "IT professionals experiencing burnout."
+        description: "Chuyên gia IT kiệt sức vì làm việc quá giờ."
       },
       {
         label: "Shift Tracker 2025",
-        value: "10-12 hrs",
-        description: "Daily hours for 58% of Gig Economy drivers."
+        value: "10-12 giờ/ngày",
+        description: "Thời gian làm việc trung bình của 58% tài xế Gig Economy."
       }
     ]
   },
   {
     id: "relative-section",
     type: "relative",
-    title: "SẢN XUẤT GIÁ TRỊ THẶNG DƯ TƯƠNG ĐỐI",
-    shortConcept: "Achieved by reducing the necessary labor time (t) through increased labor productivity, thereby expanding surplus labor time (t') within a fixed working day.",
-    formula: "Total Working Day = t (decreases) + t' (increases)",
+    title: "GIÁ TRỊ THẶNG DƯ TƯƠNG ĐỐI",
+    shortConcept: "Rút ngắn thời gian lao động tất yếu nhờ tăng năng suất lao động xã hội, từ đó kéo dài thời gian lao động thặng dư trong điều kiện độ dài ngày lao động không đổi.",
+    formula: "Ngày lao động không đổi = t (giảm) + t' (tăng)",
     metrics: [
       {
-        label: "PwC 2025",
-        value: "AI Integration",
-        description: "Generative AI like GitHub Copilot reducing necessary coding time."
+        label: "Báo cáo PwC 2025",
+        value: "AI Tạo sinh",
+        description: "Công cụ như GitHub Copilot giúp rút ngắn đáng kể thời gian lao động tất yếu."
       }
     ]
   },
@@ -57,13 +57,13 @@ export const theoryContent: TheorySection[] = [
     id: "extra-section",
     type: "extra",
     title: "GIÁ TRỊ THẶNG DƯ SIÊU NGẠCH",
-    shortConcept: "A temporary advantage gained when individual labor productivity exceeds the social average, lowering individual value below social value.",
-    formula: "Extra m = Social Value - Individual Value",
+    shortConcept: "Phần giá trị thặng dư thu được do tăng năng suất lao động cá biệt, làm cho giá trị cá biệt của hàng hóa thấp hơn giá trị thị trường. Đây là hình thái biến tướng của thặng dư tương đối.",
+    formula: "Giá trị thặng dư siêu ngạch = Giá trị thị trường - Giá trị cá biệt",
     metrics: [
       {
         label: "Insilico Medicine",
-        value: "18 Months",
-        description: "AI reducing R&D time from the standard 3-6 years."
+        value: "18 Tháng",
+        description: "AI giúp rút ngắn chu kỳ R&D Y sinh học thay vì 3-6 năm như quy trình tiêu chuẩn."
       }
     ]
   }

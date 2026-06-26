@@ -58,12 +58,12 @@ export function Station03({ resetTick }: { resetTick: number }) {
 
           <EvidenceCard eyebrow="CÔNG THỨC TOÁN HỌC"
             sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="paper">
-            <Stat value="Formula" unit={relativeSection.formula} note="Rút ngắn thời gian lao động cần thiết t, kéo dài t'." />
+            <Stat value="Formula" unit={relativeSection.formula} note="Rút ngắn thời gian lao động tất yếu t, kéo dài t'." />
           </EvidenceCard>
 
           <EvidenceCard eyebrow="LĐ CẦN THIẾT (t)"
             sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="red">
-            <Stat value="Giảm t" unit="Rút ngắn thời gian" note="Giá trị sức lao động giảm do giá trị tư liệu sinh hoạt giảm." />
+            <Stat value="Giảm t" unit="Thời gian tất yếu rút ngắn" note="Giá trị sức lao động giảm do giá trị tư liệu sinh hoạt giảm." />
           </EvidenceCard>
 
           <EvidenceCard eyebrow="LĐ THẶNG DƯ (t')"

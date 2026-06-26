@@ -8,9 +8,9 @@ import { policyIndicators, modernVariants } from "../data/theory";
 import { theoryContent } from "../data/theoryContent";
 
 const reveals = [
-  ["Giá trị cá biệt hàng hóa", "<", "Giá trị xã hội hàng hóa"],
+  ["Giá trị cá biệt hàng hóa", "<", "Giá trị thị trường hàng hóa"],
   ["Năng suất cá biệt tăng vượt trội", "→", "Đạt giá trị thặng dư siêu ngạch"],
-  ["Đột phá công nghệ mang tính tạm thời", "nhưng", "Cạnh tranh công nghệ là phổ biến"],
+  ["Hình thái mang tính chất tạm thời", "nhưng", "Cạnh tranh công nghệ là phổ biến"],
   ["AI Y sinh (Insilico Medicine):", "Rút ngắn 3-6 năm còn 18 tháng!"],
 ];
 
