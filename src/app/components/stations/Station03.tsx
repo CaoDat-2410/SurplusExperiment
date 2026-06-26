@@ -4,12 +4,8 @@ import { FactoryBlueprint } from "../FactoryBlueprint";
 import { ControlSlider } from "../ControlSlider";
 import { EvidenceCard } from "../EvidenceCard";
 import { SourceDrawer } from "../SourceDrawer";
-import { citations } from "../data/citations";
-import { vietnamManufacturing, vietnamRobotics } from "../data/vietnamCase";
-
-function m(id: string) {
-  return citations.find((c) => c.id === id)?.marker ?? "";
-}
+import { cite } from "../data/citations";
+import { theoryContent } from "../data/theoryContent";
 
 export function Station03({ resetTick }: { resetTick: number }) {
   const [automation, setAutomation] = useState(0);
@@ -23,13 +19,11 @@ export function Station03({ resetTick }: { resetTick: number }) {
     }
   }, [resetTick]);
 
-  const mv = vietnamManufacturing;
-  const r = vietnamRobotics;
-  const wbId = "world-bank-vietnam-automation";
-  const ifrId = "ifr-robot-density";
+  const relativeSection = theoryContent.find((s) => s.type === "relative")!;
+  const [pwcCase] = relativeSection.caseStudies;
 
   return (
-    <StationLayout stationCode="TRẠM 03" title="VIỆT NAM: NHÀ MÁY ĐANG THAY ĐỔI" subtitle="Kéo slider tự động hóa 0 → 100 · bấm số nguồn để xem chi tiết">
+    <StationLayout stationCode="TRẠM 03" title={relativeSection.title} subtitle="Kéo slider tự động hóa 0 → 100 · bấm số nguồn để xem chi tiết">
       <div className="grid h-full grid-cols-12 gap-6">
         <div className="col-span-7 flex flex-col gap-4">
           <div className="min-h-0 flex-1">
@@ -42,48 +36,48 @@ export function Station03({ resetTick }: { resetTick: number }) {
             max={100}
             step={1}
             unit="%"
-            description="Tự động hóa không đơn giản là 'mất việc' — nó tái cấu trúc việc làm theo kỹ năng."
+            description="Tự động hóa bằng AI giúp tăng năng suất vượt bậc, tái cấu trúc thời gian lao động."
             onChange={setAutomation}
           />
         </div>
 
         <div className="col-span-5 grid grid-cols-2 grid-rows-3 gap-3">
-          <EvidenceCard eyebrow={`CHI PHÍ LAO ĐỘNG · ${mv.labourCost.year}`}
-            sourceId={wbId} sourceMarker={m(wbId)} onOpenSource={setOpenSource} color="teal">
-            <Stat value={`${mv.labourCost.value}`} unit={mv.labourCost.unit} note={mv.labourCost.note} />
+          <EvidenceCard eyebrow="NĂNG SUẤT AI TRUNG BÌNH"
+            sourceId={pwcCase.id} sourceMarker={cite(pwcCase.id)} onOpenSource={setOpenSource} color="teal">
+            <Stat value="+40%" unit="Năng suất trung bình" note="Của các doanh nghiệp ứng dụng Generative AI" />
           </EvidenceCard>
 
-          <EvidenceCard eyebrow={`NĂNG SUẤT SX · ${mv.productivity.year}`}
-            sourceId={wbId} sourceMarker={m(wbId)} onOpenSource={setOpenSource} color="amber">
+          <EvidenceCard eyebrow="NĂNG SUẤT AI XUẤT SẮC"
+            sourceId={pwcCase.id} sourceMarker={cite(pwcCase.id)} onOpenSource={setOpenSource} color="amber">
             <Stat
-              value={`${mv.productivity.value}`}
-              unit={mv.productivity.unit}
-              note={`VN ${mv.productivity.comparison[0].value} · TQ ${mv.productivity.comparison[1].value} · MY ${mv.productivity.comparison[2].value}`}
+              value="+163%"
+              unit="Doanh nghiệp xuất sắc nhất"
+              note="Top 20% doanh nghiệp đạt mức tăng trưởng vượt trội"
             />
           </EvidenceCard>
 
-          <EvidenceCard eyebrow="MẬT ĐỘ ROBOT · 2022"
-            sourceId={ifrId} sourceMarker={m(ifrId)} onOpenSource={setOpenSource} color="paper">
-            <Stat value={`${r.robotDensity2022.value}`} unit={r.robotDensity2022.unit} />
+          <EvidenceCard eyebrow="TÍCH HỢP TRỢ LÝ ẢO"
+            sourceId={pwcCase.id} sourceMarker={cite(pwcCase.id)} onOpenSource={setOpenSource} color="paper">
+            <Stat value="Copilot" unit="Hỗ trợ lập trình viên" note="Giúp viết hàng ngàn dòng code chỉ bằng các câu prompt" />
           </EvidenceCard>
 
-          <EvidenceCard eyebrow="THỊ TRƯỜNG ROBOT · 2024"
-            sourceId={wbId} sourceMarker={m(wbId)} onOpenSource={setOpenSource} color="red">
-            <Stat value={`+${r.robotMarketGrowth2024.value}`} unit={r.robotMarketGrowth2024.unit} />
+          <EvidenceCard eyebrow="THỜI GIAN LÀ LAO ĐỘNG CẦN THIẾT"
+            sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="red">
+            <Stat value="Giảm t₁" unit="Thời gian tất yếu rút ngắn" note="Thời gian hoàn thành các module phần mềm giảm xuống" />
           </EvidenceCard>
 
-          <EvidenceCard eyebrow="TÁC ĐỘNG ROBOT HÓA"
-            sourceId={wbId} sourceMarker={m(wbId)} onOpenSource={setOpenSource} color="amber">
+          <EvidenceCard eyebrow="THỜI GIAN LAO ĐỘNG THẶNG DƯ"
+            sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="amber">
             <Stat
-              value={`+${r.automationEffect.employmentGrowth}% / +${r.automationEffect.incomeGrowth}%`}
-              unit="việc làm / thu nhập"
-              note={`Lợi ích ${r.automationEffect.beneficiaries}.`}
+              value="Tăng t₂"
+              unit="Mở rộng thặng dư giới chủ"
+              note="Phần thời gian thặng dư làm lợi cho giới chủ công nghệ kéo dài"
             />
           </EvidenceCard>
 
-          <EvidenceCard eyebrow="VIỆC LÀM PHI CHÍNH THỨC · 2024"
-            sourceId={wbId} sourceMarker={m(wbId)} onOpenSource={setOpenSource} color="red">
-            <Stat value={`${r.informality2024.value}`} unit={r.informality2024.unit} />
+          <EvidenceCard eyebrow="ĐỘ DÀI NGÀY LAO ĐỘNG"
+            sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="red">
+            <Stat value="8 Giờ" unit="Không thay đổi độ dài ngày" note="Đặc trưng cốt lõi của sản xuất thặng dư tương đối" />
           </EvidenceCard>
         </div>
       </div>

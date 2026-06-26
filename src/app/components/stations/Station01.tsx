@@ -12,6 +12,10 @@ import {
   SurplusInput,
 } from "../lib/calculations";
 
+import { theoryContent } from "../data/theoryContent";
+
+const essenceSection = theoryContent.find((s) => s.type === "essence")!;
+
 const DEFAULT: SurplusInput = { totalHours: 8, productivity: 100, realWage: 100 };
 
 // Popup lý thuyết gốc (3.1.2)
@@ -35,10 +39,7 @@ function TheoryPopup({ onClose }: { onClose: () => void }) {
           </button>
         </div>
         <p style={{ fontFamily: "var(--font-body)", fontSize: 15, color: "var(--ink)", lineHeight: 1.65, marginBottom: 16 }}>
-          Giá trị thặng dư là phần giá trị mới do lao động tạo ra vượt quá giá trị sức
-          lao động được trả bằng tiền lương. Nhà tư bản mua sức lao động như một hàng hóa
-          đặc biệt — khi sử dụng trong sản xuất, sức lao động tạo ra lượng giá trị lớn
-          hơn chính giá trị của nó.
+          {essenceSection.concept}
         </p>
         <div
           className="mb-4 p-4"
@@ -150,7 +151,7 @@ export function Station01({ resetTick }: { resetTick: number }) {
   };
 
   return (
-    <StationLayout stationCode="TRẠM 01" title="CỖ MÁY GIÁ TRỊ THẶNG DƯ" subtitle="Mô phỏng công thức — tính từ thông số bạn nhập">
+    <StationLayout stationCode="TRẠM 01" title={essenceSection.title} subtitle="Mô phỏng công thức — tính từ thông số bạn nhập">
       <div className="grid h-full grid-cols-12 gap-6">
         {/* left: time card + formula + badge */}
         <div className="col-span-7 flex flex-col justify-center gap-4">

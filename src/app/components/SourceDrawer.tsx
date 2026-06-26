@@ -3,70 +3,67 @@ import { citations, Citation } from "./data/citations";
 
 // Per-citation detail: what data is used and how
 const details: Record<string, { dataPoints: string[]; usage: string }> = {
-  "ilo-labour-share": {
+  "oxfam-2024": {
     dataPoints: [
-      "2004: 53,9% — tỷ trọng thu nhập lao động toàn cầu",
-      "2019: 53,0% — mốc trước đại dịch",
-      "2022: 52,3% — đáy sau đại dịch",
-      "2024: 52,4% — ước tính gần đây",
-      "2025: 52,6% — ước tính cập nhật",
-      "Năng suất lao động/giờ 2004–2024: +58%",
-      "Thu nhập lao động/giờ 2004–2024: +53%",
-      "Thu nhập lao động bị hụt năm 2024: ~2,4 nghìn tỷ USD",
+      "Tài sản tỷ phú toàn cầu tăng thêm 2.000 tỷ USD chỉ trong năm 2024.",
+      "Tạo ra trung bình 4 tỷ phú mới mỗi tuần.",
+      "60% tài sản này đến từ sức mạnh độc quyền và mối quan hệ, không tương xứng với công sức lao động.",
     ],
     usage:
-      "Dùng để chứng minh phần lao động nhận được trong tổng giá trị mới tạo ra tăng chậm hơn phần thuộc về vốn — minh họa trực tiếp xu hướng giá trị thặng dư tương đối trong dài hạn.",
+      "Dùng để chứng minh quy mô của sự bóc lột và lượng giá trị thặng dư (M) tích lũy khổng lồ được dịch chuyển về phía giới chủ tư bản.",
   },
-  "world-bank-vietnam-automation": {
+  "bloomberg-2026": {
     dataPoints: [
-      "Chi phí lao động sản xuất Việt Nam 2022: 4,9 USD/giờ (gần gấp ba 2010–2022)",
-      "Năng suất sản xuất Việt Nam 2022: 6,7 USD giá trị gia tăng/giờ",
-      "So sánh: Trung Quốc 14,4 · Malaysia 27,7 (cùng đơn vị)",
-      "Mật độ robot Việt Nam 2022: 7 robot/1.000 lao động sản xuất",
-      "Tăng trưởng thị trường robot 2024: +27%",
-      "Tác động robot hóa: việc làm +10%, thu nhập +5%",
-      "Lợi ích chủ yếu thuộc lao động trung và cao kỹ năng",
-      "Việc làm phi chính thức 2024: 64,6%",
-      "Lao động sản xuất kỹ năng thấp 2021: ~85%; kỹ năng cao: <6%",
+      "Biên lợi nhuận kỷ lục 14,5% của các tập đoàn thuộc S&P 500 ghi nhận vào Quý 1/2026.",
     ],
     usage:
-      "Dùng để liên hệ lý thuyết giá trị thặng dư tương đối với thực tiễn Việt Nam — tự động hóa rút ngắn t₁ nhưng lợi ích phân phối không đồng đều giữa các nhóm kỹ năng.",
+      "Minh chứng thực tiễn cho thấy khối lượng thặng dư liên tục chuyển dịch từ giai cấp lao động sang giới chủ tư bản.",
   },
-  "ifr-robot-density": {
+  "isaca-2025": {
     dataPoints: [
-      "Mật độ robot toàn cầu ~7 năm trước 2023: 74 robot/10.000 lao động sản xuất",
-      "Mật độ robot toàn cầu 2023: 162 robot/10.000 lao động sản xuất",
-      "Mật độ robot toàn cầu 2024: 177 robot/10.000 lao động sản xuất",
+      "73% chuyên gia IT rơi vào trạng thái kiệt sức (burnout) tại Châu Âu.",
+      "61% kiệt sức do khối lượng công việc quá tải và áp lực deadline.",
+      "Lập trình viên gỡ lỗi (debug) cường độ cao để tạo ra sản phẩm mà không tăng tư bản khả biến (lương).",
     ],
     usage:
-      "Dùng để minh họa tốc độ tăng tự động hóa toàn cầu — bối cảnh cho case Việt Nam và lập luận về giá trị thặng dư tương đối qua công nghệ.",
+      "Minh họa phương pháp sản xuất giá trị thặng dư tuyệt đối thông qua tăng cường độ lao động gián tiếp trong thời đại số.",
   },
-  "oecd-labour-share": {
+  "shift-tracker-2025": {
     dataPoints: [
-      "Phân tích tỷ trọng lao động và capital deepening theo OECD",
-      "Nghiên cứu phân phối thành quả năng suất giữa lao động và vốn",
+      "58% người làm nghề giao hàng phải dùng cùng lúc nhiều ứng dụng (multi-apping).",
+      "Làm việc liên tục từ 10-12 tiếng mỗi ngày.",
+      "Mức chiết khấu nền tảng chiếm từ 27% đến 37% trên tổng thu nhập.",
     ],
     usage:
-      "Bối cảnh học thuật bổ sung cho xu hướng labour share toàn cầu, kiểm chứng chéo với số liệu ILO.",
+      "Minh chứng cho phương pháp thặng dư tuyệt đối bằng cách kéo dài ngày lao động thực tế và vắt kiệt lao động gig.",
   },
-  "bea-us-profits": {
+  "pwc-2025": {
     dataPoints: [
-      "Lợi nhuận doanh nghiệp Mỹ 2024: 3.801,8 tỷ USD",
-      "Lợi nhuận doanh nghiệp Mỹ 2025: 4.077,5 tỷ USD",
-      "Lợi nhuận doanh nghiệp Mỹ Q1 2026 (mức quy năm): 4.392,5 tỷ USD",
+      "Doanh nghiệp ứng dụng AI tăng năng suất lao động trung bình 40%.",
+      "Top 20% doanh nghiệp xuất sắc đạt mức tăng trưởng năng suất 163%.",
+      "Tích hợp các trợ lý ảo (GitHub Copilot) rút ngắn đáng kể thời gian hoàn thành module (lao động tất yếu t₁).",
     ],
     usage:
-      "Minh họa xu hướng lợi nhuận doanh nghiệp tăng trong khi labour share giảm — bổ sung cho lập luận về phân phối giá trị thặng dư.",
+      "Minh họa cho phương pháp sản xuất giá trị thặng dư tương đối bằng cách tăng năng suất lao động xã hội để rút ngắn thời gian tất yếu t₁.",
+  },
+  "insilico-2025": {
+    dataPoints: [
+      "Dùng AI đưa thuốc mới từ khâu tìm mục tiêu đến thử nghiệm tiền lâm sàng chỉ mất 18 tháng.",
+      "Quy trình trung bình xã hội của ngành tốn từ 3 đến 6 năm.",
+      "Rút ngắn thời gian và chi phí khổng lồ tạo ra khoản thặng dư siêu ngạch lớn.",
+    ],
+    usage:
+      "Minh họa trực quan cho giá trị thặng dư siêu ngạch thu được khi hạ giá trị cá biệt thấp hơn giá trị xã hội.",
   },
   "pdf-source": {
     dataPoints: [
-      "Bản chất của giá trị thặng dư (mục 3.1.2)",
-      "Giá trị thặng dư tuyệt đối: kéo dài ngày lao động",
-      "Giá trị thặng dư tương đối: tăng năng suất, rút ngắn t₁",
-      "Công thức: t = t₁ + t₂; s/v = t₂/t₁ × 100%",
+      "Bản chất của giá trị thặng dư (Mục 1.2).",
+      "Sản xuất giá trị thặng dư tuyệt đối (Mục 1.3.1).",
+      "Sản xuất giá trị thặng dư tương đối (Mục 1.3.2).",
+      "Giá trị thặng dư siêu ngạch (Mục 1.3.3).",
     ],
     usage:
-      "Nguồn lý thuyết chính của bài. Toàn bộ khái niệm, công thức và định nghĩa trong web đều xuất phát từ tài liệu này.",
+      "Nguồn lý thuyết cốt lõi của toàn bộ ứng dụng, cung cấp các định nghĩa và công thức toán học Marxian.",
   },
 };
 

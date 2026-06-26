@@ -4,12 +4,13 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { StationLayout } from "../StationLayout";
 import { useRevealStep } from "../lib/useDeck";
 import { policyIndicators, modernVariants } from "../data/theory";
+import { theoryContent } from "../data/theoryContent";
 
 const reveals = [
-  ["Năng suất tăng", "≠", "Lương tăng tương ứng"],
-  ["Lương tăng", "≠", "Lao động hưởng phần lớn hơn"],
-  ["Vấn đề không phải:", "Có nên tăng năng suất hay không?"],
-  ["Vấn đề là:", "AI NHẬN PHẦN TĂNG TRƯỞNG?"],
+  ["Giá trị cá biệt hàng hóa", "<", "Giá trị xã hội hàng hóa"],
+  ["Năng suất cá biệt tăng vượt trội", "→", "Đạt giá trị thặng dư siêu ngạch"],
+  ["Công nghệ đi đầu mang tính tạm thời", "nhưng", "Cạnh tranh công nghệ là phổ biến"],
+  ["AI Y sinh (Insilico Medicine):", "Rút ngắn 3-6 năm còn 18 tháng!"],
 ];
 
 function MethodCards() {
@@ -52,9 +53,10 @@ function MethodCards() {
 
 export function Station04({ revealTick, resetTick }: { revealTick: number; resetTick: number }) {
   const step = useRevealStep(4, revealTick, resetTick);
+  const extraSection = theoryContent.find((s) => s.type === "extra")!;
 
   return (
-    <StationLayout stationCode="TRẠM 04" title="KẾT LUẬN & CHÍNH SÁCH" subtitle="Space để reveal từng luận điểm → bảng chỉ báo">
+    <StationLayout stationCode="TRẠM 04" title={extraSection.title} subtitle="Space để reveal từng luận điểm → bảng chỉ báo">
       <div className="grid h-full grid-cols-12 gap-6">
         {/* left: reveals + method cards */}
         <div className="col-span-7 flex flex-col justify-center gap-5">
@@ -65,25 +67,28 @@ export function Station04({ revealTick, resetTick }: { revealTick: number; reset
               animate={{ opacity: step >= i ? 1 : 0.1, x: step >= i ? 0 : -12 }}
               transition={{ duration: 0.3, ease: "linear" }}
             >
-              {block.map((line, j) => (
-                <div
-                  key={j}
-                  style={{
-                    fontFamily: line === "≠" ? "var(--font-mono)" : "var(--font-display)",
-                    fontWeight: 800,
-                    fontSize: line === "≠" ? 28 : i === 3 && j === 1 ? 40 : 30,
-                    lineHeight: 1.05,
-                    color:
-                      line === "≠"
-                        ? "var(--surplus-red)"
-                        : i === 3 && j === 1
-                          ? "var(--amber-signal)"
-                          : "var(--paper)",
-                  }}
-                >
-                  {line}
-                </div>
-              ))}
+              {block.map((line, j) => {
+                const isConnector = line === "<" || line === "→" || line === "nhưng";
+                return (
+                  <div
+                    key={j}
+                    style={{
+                      fontFamily: isConnector ? "var(--font-mono)" : "var(--font-display)",
+                      fontWeight: 800,
+                      fontSize: isConnector ? 28 : i === 3 && j === 1 ? 40 : 30,
+                      lineHeight: 1.05,
+                      color:
+                        isConnector
+                          ? "var(--surplus-red)"
+                          : i === 3 && j === 1
+                            ? "var(--amber-signal)"
+                            : "var(--paper)",
+                    }}
+                  >
+                    {line}
+                  </div>
+                );
+              })}
             </motion.div>
           ))}
 
