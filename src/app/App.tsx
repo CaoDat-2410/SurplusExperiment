@@ -19,6 +19,7 @@ const NAV = [
   { code: "TRẠM 02", short: "Tuyệt đối" },
   { code: "TRẠM 03", short: "Tương đối" },
   { code: "TRẠM 04", short: "Siêu ngạch" },
+  { code: "PHỤ LỤC", short: "Minh bạch AI" },
   { code: "KẾT THÚC", short: "Tổng kết" },
 ];
 const TOTAL = NAV.length;
@@ -33,32 +34,18 @@ export default function App() {
   const lastRef = useRef(0);
 
   const goTo = useCallback((i: number) => {
-    const next = Math.max(0, Math.min(7, i)); // Allow indexes 0 to 7 (where 7 is AiUsage)
+    const next = Math.max(0, Math.min(TOTAL - 1, i));
     setDir(next >= lastRef.current ? 1 : -1);
     lastRef.current = next;
     setActive(next);
   }, []);
 
   const next = useCallback(() => {
-    if (lastRef.current === 5) {
-      goTo(6); // Station 04 -> EndScreen (bypassing AiUsage)
-    } else if (lastRef.current === 6) {
-      // EndScreen: do nothing
-    } else if (lastRef.current === 7) {
-      goTo(6); // AiUsage -> EndScreen
-    } else {
-      goTo(lastRef.current + 1);
-    }
+    goTo(lastRef.current + 1);
   }, [goTo]);
 
   const prev = useCallback(() => {
-    if (lastRef.current === 6) {
-      goTo(5); // EndScreen -> Station 04
-    } else if (lastRef.current === 7) {
-      goTo(5); // AiUsage -> Station 04
-    } else {
-      goTo(lastRef.current - 1);
-    }
+    goTo(lastRef.current - 1);
   }, [goTo]);
 
   const reveal = useCallback(() => setRevealTick((t) => t + 1), []);
@@ -86,8 +73,8 @@ export default function App() {
       case 3: return <Station02 revealTick={revealTick} resetTick={resetTick} />;
       case 4: return <Station03 resetTick={resetTick} />;
       case 5: return <Station04 revealTick={revealTick} resetTick={resetTick} />;
-      case 6: return <EndScreen onReset={restart} />;
-      case 7: return <AiUsage />;
+      case 6: return <AiUsage />;
+      case 7: return <EndScreen revealTick={revealTick} resetTick={resetTick} onReset={restart} />;
       default: return null;
     }
   };
@@ -96,7 +83,7 @@ export default function App() {
     <div className="grid-bg relative flex h-screen w-full flex-col overflow-hidden" {...swipe}>
       <div className="absolute right-4 top-4 z-30 flex gap-2">
         {[
-          { icon: BookOpen, fn: () => goTo(7), label: "Minh bạch AI & nguồn" },
+          { icon: BookOpen, fn: () => goTo(6), label: "Minh bạch AI & nguồn" },
           { icon: Maximize, fn: toggleFullscreen, label: "Toàn màn hình (F)" },
           { icon: HelpCircle, fn: () => setHelp(true), label: "Trợ giúp (H)" },
         ].map(({ icon: Icon, fn, label }) => (
@@ -107,7 +94,7 @@ export default function App() {
         ))}
       </div>
 
-      <div className="svl-scan relative min-h-0 flex-1 overflow-hidden">
+      <div className="svl-scan scrollbar-thin scrollbar-thumb-hide relative min-h-0 flex-1 overflow-y-auto">
         <AnimatePresence mode="wait" custom={dir}>
           <motion.div
             key={active}
@@ -123,7 +110,7 @@ export default function App() {
         </AnimatePresence>
       </div>
 
-      <BottomNav stations={NAV} current={active === 7 ? -1 : active} onNavigate={goTo} />
+      <BottomNav stations={NAV} current={active} onNavigate={goTo} />
 
       {help && (
         <div className="absolute inset-0 z-40 flex items-center justify-center"
