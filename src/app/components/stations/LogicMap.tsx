@@ -4,30 +4,28 @@ import { ArrowRight, ArrowDown } from "lucide-react";
 const steps = [
   {
     id: 1,
-    text: "Lao động tạo ra giá trị mới trong sản xuất",
-    sub: "Không phải trong lưu thông hay trao đổi thuần túy",
+    text: "Bản chất giá trị thặng dư",
+    sub: "Lao động tạo giá trị mới, tiền lương chỉ bằng giá trị sức lao động, phần giá trị thặng dư bị tư bản chiếm đoạt."
   },
   {
     id: 2,
-    text: "Tiền lương chỉ trả ngang bằng giá trị sức lao động",
-    sub: "Không phải toàn bộ giá trị mà lao động tạo ra",
+    text: "Giá trị thặng dư tuyệt đối",
+    sub: "Kéo dài ngày lao động hoặc tăng cường độ lao động (không đổi năng suất xã hội).",
   },
   {
     id: 3,
-    text: "Phần vượt quá tiền lương = giá trị thặng dư",
-    sub: "m = giá trị mới − v · Tỷ suất: s/v = t₂/t₁ × 100%",
-    highlight: true,
+    text: "Giá trị thặng dư tương đối",
+    sub: "Rút ngắn thời gian tất yếu bằng tăng năng suất xã hội, ngày làm không đổi.",
   },
   {
     id: 4,
-    text: "Tư bản mở rộng phần này bằng nhiều phương pháp",
-    sub: "Kéo dài giờ làm · Tăng năng suất · Ép lương · Tự động hóa · Thuê ngoài",
+    text: "Giá trị thặng dư siêu ngạch",
+    sub: "Năng suất cá biệt vượt trội → giá trị cá biệt < giá trị thị trường → lợi nhuận đặc biệt.",
   },
   {
     id: 5,
-    text: "Câu hỏi thực tiễn: ai nhận phần tăng trưởng?",
-    sub: "Năng suất tăng ≠ lao động tự động hưởng phần lớn hơn",
-    highlight: true,
+    text: "Câu hỏi cốt lõi cuối cùng",
+    sub: "AI là người thụ hưởng tăng trưởng? Năng suất tăng ≠ lao động tự động được lợi.",
   },
 ];
 
@@ -51,8 +49,8 @@ export function LogicMap({ onNext }: { onNext: () => void }) {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, delay: i * 0.1, ease: "linear" }}
-                className="card-industrial flex flex-1 flex-col p-4 md:p-5 m-1"
-                style={{justifyContent: "space-between"}}
+                className="card-industrial flex flex-col p-4 md:p-5 m-1"
+                style={{ minHeight: 200 }}
               >
                 <div
                   className="card-number"
@@ -60,11 +58,12 @@ export function LogicMap({ onNext }: { onNext: () => void }) {
                     fontFamily: "var(--font-mono)",
                     fontSize: 11,
                     letterSpacing: "0.06em",
+                    marginBottom: 16,
                   }}
                 >
                   {String(s.id).padStart(2, "0")}
                 </div>
-                <div className="flex flex-col gap-2 flex-1 justify-center">
+                <div className="flex flex-col gap-3">
                   <div
                     className="card-title"
                     style={{
@@ -72,6 +71,7 @@ export function LogicMap({ onNext }: { onNext: () => void }) {
                       fontWeight: 800,
                       fontSize: 16,
                       lineHeight: 1.15,
+                      minHeight: 38,
                     }}
                   >
                     {s.text}
@@ -82,6 +82,7 @@ export function LogicMap({ onNext }: { onNext: () => void }) {
                       fontSize: 11,
                       color: "color-mix(in srgb, var(--paper) 60%, transparent)",
                       lineHeight: 1.5,
+                      minHeight: 48,
                     }}
                   >
                     {s.sub}
