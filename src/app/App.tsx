@@ -9,16 +9,22 @@ import { Station01 } from "./components/stations/Station01";
 import { Station02 } from "./components/stations/Station02";
 import { Station03 } from "./components/stations/Station03";
 import { Station04 } from "./components/stations/Station04";
+import { Station05 } from "./components/stations/Station05";
 import { AiUsage } from "./components/stations/AiUsage";
 import { EndScreen } from "./components/stations/EndScreen";
 
 const NAV = [
+  // LÝ THUYẾT
   { code: "MỞ ĐẦU", short: "Giới thiệu" },
   { code: "BẢN ĐỒ", short: "Logic bài" },
   { code: "TRẠM 01", short: "Cỗ máy" },
+  // DẪN CHỨNG
   { code: "TRẠM 02", short: "Dữ liệu" },
   { code: "TRẠM 03", short: "Việt Nam" },
+  { code: "TRẠM 05", short: "Thặng dư" },
+  // KẾT LUẬN
   { code: "TRẠM 04", short: "Kết luận" },
+  // PHỤ LỤC
   { code: "PHỤ LỤC", short: "Minh bạch AI" },
   { code: "KẾT THÚC", short: "Tổng kết" },
 ];
@@ -66,9 +72,10 @@ export default function App() {
       case 2: return <Station01 resetTick={resetTick} />;
       case 3: return <Station02 revealTick={revealTick} resetTick={resetTick} />;
       case 4: return <Station03 resetTick={resetTick} />;
-      case 5: return <Station04 revealTick={revealTick} resetTick={resetTick} />;
-      case 6: return <AiUsage />;
-      case 7: return <EndScreen onReset={restart} />;
+      case 5: return <Station05 />;
+      case 6: return <Station04 revealTick={revealTick} resetTick={resetTick} />;
+      case 7: return <AiUsage />;
+      case 8: return <EndScreen onReset={restart} />;
       default: return null;
     }
   };
@@ -78,7 +85,7 @@ export default function App() {
       {/* Top buttons */}
       <div className="absolute right-2 sm:right-4 top-2 sm:top-4 z-30 flex gap-1 sm:gap-2">
         {[
-          { icon: BookOpen, fn: () => goTo(6), label: "Minh bạch AI & nguồn" },
+          { icon: BookOpen, fn: () => goTo(7), label: "Minh bạch AI & nguồn" },
           { icon: Maximize, fn: toggleFullscreen, label: "Toàn màn hình (F)" },
           { icon: HelpCircle, fn: () => setHelp(true), label: "Trợ giúp (H)" },
         ].map(({ icon: Icon, fn, label }) => (
@@ -89,7 +96,7 @@ export default function App() {
         ))}
       </div>
 
-      <div className="svl-scan relative min-h-0 flex-1 overflow-y-auto">
+      <div className="svl-scan scrollbar-thin scrollbar-thumb-hide relative min-h-0 flex-1 overflow-y-auto">
         <AnimatePresence mode="wait" custom={dir}>
           <motion.div
             key={active}

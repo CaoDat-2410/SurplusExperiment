@@ -30,8 +30,14 @@ export const theoryCards: TheoryCard[] = [
   {
     id: "rate-of-surplus-value",
     title: "Tỷ suất giá trị thặng dư",
-    formula: "s/v = t₂/t₁ × 100%",
-    body: "Tỷ lệ giữa lao động thặng dư và lao động cần thiết, biểu thị mức độ tạo ra giá trị thặng dư.",
+    formula: "m' = (m/v) × 100% = s/v",
+    body: "m = giá trị thặng dư · v = giá trị sức lao động. Tỷ lệ m/v biểu thị mức độ bóc lột.",
+  },
+  {
+    id: "mass-surplus-value",
+    title: "Khối lượng giá trị thặng dư",
+    formula: "M = m' × V",
+    body: "M — khối lượng thặng dư · m' — tỷ suất thặng dư · V — tổng vốn tư bản khả thi. M biểu thị quy mô bóc lột tổng thể.",
   },
   {
     id: "absolute-surplus-value",
@@ -47,7 +53,7 @@ export const theoryCards: TheoryCard[] = [
   },
 ];
 
-// Modern variants table (section 3.3.3)
+// Modern variants table (section 3.1.3)
 export const modernVariants = [
   { id: "mv-1", form: "Kéo dài giờ làm, làm thêm, tăng cường độ", link: "Giá trị thặng dư tuyệt đối" },
   { id: "mv-2", form: "Tự động hóa, robot hóa, AI, tối ưu quy trình", link: "Giá trị thặng dư tương đối" },
@@ -55,6 +61,7 @@ export const modernVariants = [
   { id: "mv-4", form: "Thuê ngoài, chuỗi giá trị toàn cầu", link: "Dịch chuyển khai thác lao động sang nơi chi phí thấp" },
   { id: "mv-5", form: "Lao động nền tảng số, gig work", link: "Chuyển rủi ro & chi phí tái sản xuất sức lao động về phía người lao động" },
   { id: "mv-6", form: "Tài chính hóa", link: "Phân phối lại giá trị thặng dư sang lợi nhuận tài chính, cổ tức, lãi vay" },
+  { id: "mv-extra", form: "Giá trị thặng dư siêu ngạch", link: "Công nghệ vượt trội → lợi nhuận vượt mức tạm thời" },
 ];
 
 // Policy indicators (section 12 — Station 04)

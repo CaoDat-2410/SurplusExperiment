@@ -186,7 +186,7 @@ export function LogicMap({ onNext }: { onNext: () => void }) {
           className="svl-press focus-amber flex items-center gap-2 sm:gap-3 px-5 sm:px-7 py-3 sm:py-4 cursor-pointer"
           style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(12px, 1.8vw, 13px)", letterSpacing: "0.1em", color: "var(--ink)", background: "var(--amber-signal)", borderRadius: 6, border: "none" }}
         >
-          VÀO TRẠM 01 
+          VÀO TRẠM 01 (CỖ MÁY)
           <ArrowRight size={14} className="sm:w-4 sm:h-4" />
         </motion.button>
       </motion.div>

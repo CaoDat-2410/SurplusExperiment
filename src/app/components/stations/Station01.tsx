@@ -78,7 +78,10 @@ function TheoryPopup({ onClose }: { onClose: () => void }) {
           <div style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(12px, 1.8vw, 13px)", color: "var(--paper)", lineHeight: 1.8 }}>
             <div>Ngày lao động: <span style={{ color: "var(--amber-signal)" }}>t = t₁ + t₂</span></div>
             <div style={{ fontSize: "clamp(10px, 1.8vw, 11px)", opacity: 0.7 }}>t₁ — lao động cần thiết · t₂ — lao động thặng dư</div>
-            <div style={{ marginTop: 8 }}>Tỷ suất: <span style={{ color: "var(--amber-signal)" }}>s/v = t₂ / t₁ × 100%</span></div>
+            <div style={{ marginTop: 8 }}>Tỷ suất: <span style={{ color: "var(--amber-signal)" }}>m' = m/v × 100%</span></div>
+            <div style={{ fontSize: "clamp(10px, 1.8vw, 11px)", opacity: 0.7 }}>m — giá trị thặng dư · v — giá trị sức lao động</div>
+            <div style={{ marginTop: 8 }}>Khối lượng: <span style={{ color: "var(--amber-signal)" }}>M = m' × V</span></div>
+            <div style={{ fontSize: "clamp(10px, 1.8vw, 11px)", opacity: 0.7 }}>M — quy mô bóc lột · V — tổng vốn tư bản khả thi</div>
           </div>
         </div>
       </motion.div>
@@ -183,7 +186,7 @@ export function Station01({ resetTick }: { resetTick: number }) {
         <div className="flex min-h-[560px] flex-col justify-center gap-3 sm:gap-4 lg:col-span-7 lg:min-h-0">
           {/* Formula and theory button row */}
           <div className="flex items-center gap-2">
-            <FormulaBox lines={["t = t₁ + t₂", "s/v = t₂ / t₁ × 100%"]} />
+            <FormulaBox lines={["t = t₁ + t₂", "m' = m/v × 100%", "M = m' × V"]} />
             <button
               onClick={() => setShowTheory(true)}
               className="svl-press focus-amber flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 cursor-pointer"

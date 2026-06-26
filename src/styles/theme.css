@@ -384,3 +384,23 @@
 @media (prefers-reduced-motion: reduce) {
   .svl-scan::after { animation: none; }
 }
+
+/* ── Scrollbar utilities ── */
+.scrollbar-thin::-webkit-scrollbar { width: 4px; height: 4px; }
+.scrollbar-thumb-hide::-webkit-scrollbar-thumb,
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: transparent;
+  transition: background 0.2s ease;
+}
+.scrollbar-thumb-hover:hover::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+/* Hide all scrollbars by default */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
