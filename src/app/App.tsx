@@ -21,9 +21,9 @@ const NAV = [
   // DẪN CHỨNG
   { code: "TRẠM 02", short: "Dữ liệu" },
   { code: "TRẠM 03", short: "Việt Nam" },
-  { code: "TRẠM 05", short: "Thặng dư" },
+  { code: "TRẠM 04", short: "Thặng dư" },
   // KẾT LUẬN
-  { code: "TRẠM 04", short: "Kết luận" },
+  { code: "TRẠM 05", short: "Kết luận" },
   // PHỤ LỤC
   { code: "PHỤ LỤC", short: "Minh bạch AI" },
   { code: "KẾT THÚC", short: "Tổng kết" },

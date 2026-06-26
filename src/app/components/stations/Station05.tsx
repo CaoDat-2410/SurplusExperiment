@@ -193,7 +193,7 @@ export function Station05() {
     : "Tăng năng suất của doanh nghiệp dẫn đầu để thấy cơ chế siêu ngạch hoạt động.";
 
   return (
-    <StationLayout stationCode="TRẠM 05" title="THẶNG DƯ" subtitle="Tương tác để hiểu cơ chế siêu ngạch">
+    <StationLayout stationCode="TRẠM 04" title="THẶNG DƯ" subtitle="Tương tác để hiểu cơ chế siêu ngạch">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mt-4">
         {/* Interactive Controls */}
         <div className="space-y-6">

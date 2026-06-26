@@ -156,7 +156,7 @@ export function Station04({ revealTick, resetTick }: { revealTick: number; reset
   const step = useRevealStep(4, revealTick, resetTick);
 
   return (
-    <StationLayout stationCode="TRẠM 04" title="KẾT LUẬN & CHÍNH SÁCH" subtitle="Space để reveal từng luận điểm">
+    <StationLayout stationCode="TRẠM 05" title="KẾT LUẬN & CHÍNH SÁCH" subtitle="Space để reveal từng luận điểm">
       <motion.div
         className="absolute inset-0 pointer-events-none"
         initial={{ opacity: 0 }}
