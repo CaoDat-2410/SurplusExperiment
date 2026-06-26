@@ -29,7 +29,7 @@ export function EvidenceCard({
 }: EvidenceCardProps) {
   return (
     <div className="card-industrial flex h-full flex-col p-6">
-      <div className="mb-1 flex items-center justify-between">
+      <div className="mb-10 flex items-center justify-between">
         <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: "0.06em", color: colorMap[color] }}>
           {eyebrow}
         </span>
@@ -42,7 +42,7 @@ export function EvidenceCard({
           {title}
         </div>
       )}
-      <div className="min-h-0 flex-1">{children}</div>
+      <div className="min-h-0 flex-1 mt-2">{children}</div>
     </div>
   );
 }

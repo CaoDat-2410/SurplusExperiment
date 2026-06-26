@@ -35,20 +35,32 @@ const rows = [
 export function AiUsage() {
   return (
     <StationLayout stationCode="PHỤ LỤC" title="MINH BẠCH SỬ DỤNG AI" subtitle="Minh bạch · trách nhiệm · liêm chính học thuật">
-      <div className="grid h-full grid-cols-3 gap-6">
-        <div className="col-span-2 card-paper overflow-auto p-5">
-          <div className="grid grid-cols-4 gap-3 border-b pb-2" style={{ borderColor: "var(--grid-line)", fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--ink)" }}>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 overflow-y-auto py-2">
+        <div className="col-span-1 lg:col-span-2 card-paper overflow-auto p-4 md:p-5">
+          <div className="hidden md:grid md:grid-cols-4 gap-3 border-b pb-2" style={{ borderColor: "var(--grid-line)", fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--ink)" }}>
             <span>CÔNG CỤ</span>
             <span>MỤC ĐÍCH</span>
             <span>CÂU LỆNH CHÍNH</span>
             <span>SINH VIÊN CHỈNH SỬA</span>
           </div>
           {rows.map((r) => (
-            <div key={r.id} className="grid grid-cols-4 gap-3 border-b py-3" style={{ borderColor: "color-mix(in srgb, var(--grid-line) 40%, transparent)", fontFamily: "var(--font-body)", fontSize: 13, color: "var(--ink)" }}>
-              <span style={{ fontWeight: 600 }}>{r.tool}</span>
-              <span>{r.purpose}</span>
-              <span>{r.prompt}</span>
-              <span>{r.edits}</span>
+            <div key={r.id} className="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-3 border-b py-3" style={{ borderColor: "color-mix(in srgb, var(--grid-line) 40%, transparent)", fontFamily: "var(--font-body)", fontSize: 13, color: "var(--ink)" }}>
+              <span style={{ fontWeight: 600 }} className="md:col-span-1">
+                <span className="md:hidden" style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--grid-line)" }}>CÔNG CỤ: </span>
+                {r.tool}
+              </span>
+              <span className="md:col-span-1">
+                <span className="md:hidden" style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--grid-line)" }}>MỤC ĐÍCH: </span>
+                {r.purpose}
+              </span>
+              <span className="md:col-span-1">
+                <span className="md:hidden" style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--grid-line)" }}>CÂU LỆNH: </span>
+                {r.prompt}
+              </span>
+              <span className="md:col-span-1">
+                <span className="md:hidden" style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--grid-line)" }}>CHỈNH SỬA: </span>
+                {r.edits}
+              </span>
             </div>
           ))}
           <div className="mt-4" style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--ink)", lineHeight: 1.7 }}>
@@ -57,7 +69,7 @@ export function AiUsage() {
           </div>
         </div>
 
-        <div className="card-industrial overflow-auto p-5">
+        <div className="card-industrial overflow-auto p-4 md:p-5">
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: "0.1em", color: "var(--amber-signal)", marginBottom: 10 }}>
             NGUỒN SỐ LIỆU
           </div>

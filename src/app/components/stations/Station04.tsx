@@ -215,9 +215,9 @@ export function Station04({ revealTick, resetTick }: { revealTick: number; reset
 
   return (
     <StationLayout stationCode="TRẠM 04" title={extraSection.title} subtitle="Space để reveal từng luận điểm → mô phỏng siêu ngạch tương tác">
-      <div className="grid h-full grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 overflow-y-auto py-2">
         {/* Cột trái (7 cột): Reveals lý thuyết & Thực tiễn */}
-        <div className="col-span-7 flex flex-col justify-center gap-4">
+        <div className="col-span-1 md:col-span-7 flex flex-col gap-4">
           <motion.div
             initial={false}
             animate={{ opacity: step >= 0 ? 1 : 0.1 }}
@@ -244,7 +244,7 @@ export function Station04({ revealTick, resetTick }: { revealTick: number; reset
                     style={{
                       fontFamily: isConnector ? "var(--font-mono)" : "var(--font-display)",
                       fontWeight: 800,
-                      fontSize: isConnector ? 26 : 24,
+                      fontSize: isConnector ? 18 : 16,
                       lineHeight: 1.1,
                       color: isConnector ? "var(--surplus-red)" : "var(--paper)",
                       marginRight: 10,
@@ -277,7 +277,7 @@ export function Station04({ revealTick, resetTick }: { revealTick: number; reset
             <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--grid-line)", fontWeight: 700, marginBottom: 6 }}>
               INSILICO MEDICINE
             </div>
-            <div style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 38, color: "var(--amber-signal)", lineHeight: 1.1 }}>
+            <div style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 24, color: "var(--amber-signal)", lineHeight: 1.1 }}>
               Rút ngắn <Odometer value={3} decimals={0} />-<Odometer value={6} decimals={0} /> năm còn <Odometer value={18} decimals={0} suffix=" tháng!" />
             </div>
             <p style={{ fontFamily: "var(--font-body)", fontSize: 14, color: "var(--paper)", marginTop: 6, lineHeight: 1.4 }}>
@@ -288,7 +288,7 @@ export function Station04({ revealTick, resetTick }: { revealTick: number; reset
 
         {/* Cột phải (5 cột): Mô phỏng tương tác */}
         <motion.div
-          className="col-span-5 flex flex-col justify-center gap-4"
+          className="col-span-1 md:col-span-5 flex flex-col gap-4"
           initial={false}
           animate={{ opacity: step >= 4 ? 1 : 0.1 }}
           transition={{ duration: 0.3, ease: "linear" }}

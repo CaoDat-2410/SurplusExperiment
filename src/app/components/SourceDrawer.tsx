@@ -28,14 +28,15 @@ const details: Record<string, { dataPoints: string[]; usage: string }> = {
     usage:
       "Minh họa phương pháp sản xuất giá trị thặng dư tuyệt đối thông qua tăng cường độ lao động gián tiếp trong thời đại số.",
   },
-  "shift-tracker-2025": {
+  "cbs-news-amazon": {
     dataPoints: [
-      "58% người làm nghề giao hàng phải dùng cùng lúc nhiều ứng dụng (multi-apping).",
-      "Làm việc liên tục từ 10-12 tiếng mỗi ngày.",
-      "Mức chiết khấu nền tảng chiếm từ 27% đến 37% trên tổng thu nhập.",
+      "41% công nhân Amazon kho hàng bị chấn thương (cuộc khảo sát 1.400 người tại 451 cơ sở).",
+      "69% những người bị chấn thương phải nghỉ không lương để hồi phục.",
+      "Tỷ lệ chấn thương 6.6/100 người, gấp đôi ngành trung bình (3.2/100 người).",
+      "Hệ thống theo dõi năng suất điện tử ép công nhân làm nhanh hơn, tăng nguy cơ chấn thương.",
     ],
     usage:
-      "Minh chứng cho phương pháp thặng dư tuyệt đối bằng cách kéo dài ngày lao động thực tế và vắt kiệt lao động gig.",
+      "Minh chứng cho phương pháp thặng dư tuyệt đối bằng cách tăng cường độ lao động và ép làm thêm giờ không lương, gây chấn thương cho công nhân kho hàng Amazon.",
   },
   "pwc-2025": {
     dataPoints: [
@@ -93,13 +94,30 @@ export function SourceDrawer({ citationId, onClose }: SourceDrawerProps) {
       >
         {/* header */}
         <div className="mb-5 flex items-start justify-between gap-3">
-          <div>
+          <div className="flex-1">
             <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "var(--amber-signal)", marginBottom: 4 }}>
               NGUỒN {cit.marker}
             </div>
             <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 20, color: "var(--paper)", lineHeight: 1.2 }}>
               {cit.label}
             </div>
+            {cit.url && (
+              <a 
+                href={cit.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ 
+                  fontFamily: "var(--font-mono)", 
+                  fontSize: 12, 
+                  color: "var(--necessary-teal)", 
+                  marginTop: 8, 
+                  display: "inline-block",
+                  textDecoration: "underline"
+                }}
+              >
+                {cit.url}
+              </a>
+            )}
           </div>
           <button onClick={onClose} className="focus-amber mt-1 shrink-0" style={{ color: "var(--surplus-red)", cursor: "pointer" }}>
             <X size={20} />

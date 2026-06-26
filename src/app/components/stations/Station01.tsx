@@ -21,12 +21,12 @@ const DEFAULT: SurplusInput = { totalHours: 8, productivity: 100, realWage: 100 
 function TheoryPopup({ onClose }: { onClose: () => void }) {
   return (
     <div
-      className="absolute inset-0 z-30 flex items-center justify-center"
+      className="absolute inset-0 z-30 flex items-center justify-center p-4"
       style={{ background: "color-mix(in srgb, var(--ink) 90%, transparent)" }}
       onClick={onClose}
     >
       <div
-        className="card-paper w-[580px] p-8"
+        className="card-paper w-full max-w-md p-6 md:p-8"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
@@ -82,7 +82,7 @@ function EssenceSplitCard() {
   const [metric1, metric2] = essenceSection.metrics;
 
   return (
-    <div className="grid grid-cols-2 gap-6 mt-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-4">
       {/* SECTION A: LÝ THUYẾT CỐT LÕI */}
       <div className="card-industrial p-6" style={{ background: "color-mix(in srgb, var(--ink) 60%, transparent)" }}>
         <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, letterSpacing: "0.1em", color: "var(--amber-signal)", marginBottom: 12, fontWeight: 700 }}>
@@ -181,10 +181,10 @@ export function Station01({ resetTick }: { resetTick: number }) {
 
   return (
     <StationLayout stationCode="TRẠM 01" title={essenceSection.title} subtitle="Mô phỏng công thức — tính từ thông số bạn nhập">
-      <div className="grid h-full grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 overflow-y-auto py-2">
         {/* left: time card + formula + badge */}
-        <div className="col-span-7 flex flex-col justify-center gap-4">
-          <div className="flex items-center gap-3">
+        <div className="col-span-1 md:col-span-7 flex flex-col gap-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             <FormulaBox lines={["t = t₁ + t₂", essenceSection.formula]} />
             <button
               onClick={() => setShowTheory(true)}
@@ -209,7 +209,7 @@ export function Station01({ resetTick }: { resetTick: number }) {
         </div>
 
         {/* right: sliders */}
-        <div className="col-span-5 flex flex-col justify-center gap-4">
+        <div className="col-span-1 md:col-span-5 flex flex-col gap-4">
           <ControlSlider
             label="Giờ làm / ngày"
             value={state.totalHours}

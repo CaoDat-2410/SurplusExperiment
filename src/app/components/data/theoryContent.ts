@@ -24,8 +24,8 @@ export const theoryContent: TheorySection[] = [
     id: "absolute-section",
     type: "absolute",
     title: "GIÁ TRỊ THẶNG DƯ TUYỆT ĐỐI",
-    shortConcept: "Kéo dài tuyệt đối ngày lao động vượt quá thời gian lao động tất yếu, trong điều kiện năng suất lao động và giá trị sức lao động không đổi.",
-    formula: "Ngày lao động tăng = t (không đổi) + t' (tăng lên)",
+    shortConcept: "Giá trị thặng dư tuyệt đối được tạo ra bằng cách kéo dài tuyệt đối ngày lao động hoặc tăng cường độ lao động, trong điều kiện năng suất xã hội và giá trị sức lao động không đổi.",
+    formula: "t₁ không đổi → t tăng = t₁ + t₂' (t₂' > t₂)",
     metrics: [
       {
         label: "Báo cáo ISACA 2025",
@@ -33,9 +33,9 @@ export const theoryContent: TheorySection[] = [
         description: "Chuyên gia IT kiệt sức vì làm việc quá giờ."
       },
       {
-        label: "Shift Tracker 2025",
-        value: "10-12 giờ/ngày",
-        description: "Thời gian làm việc trung bình của 58% tài xế Gig Economy."
+        label: "CBS News Amazon",
+        value: "41%",
+        description: "Công nhân kho hàng Amazon bị chấn thương, 69% phải nghỉ không lương."
       }
     ]
   },

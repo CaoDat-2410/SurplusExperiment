@@ -5,6 +5,7 @@ export interface Citation {
   marker: string;
   label: string;
   usedFor: string;
+  url?: string;
 }
 
 export const citations: Citation[] = [
@@ -13,6 +14,7 @@ export const citations: Citation[] = [
     marker: "[1]",
     label: "Báo cáo Oxfam 2024 (Takers Not Makers)",
     usedFor: "Tăng trưởng tài sản của các tỷ phú, số lượng tỷ phú mới hàng tuần, và sự độc quyền kinh tế toàn cầu.",
+    url: "https://www.oxfam.org/en/reports/takers-not-makers",
   },
   {
     id: "bloomberg-2026",
@@ -25,12 +27,14 @@ export const citations: Citation[] = [
     marker: "[3]",
     label: "Khủng hoảng kiệt sức nhân sự IT tại Châu Âu (ISACA 2025)",
     usedFor: "Tỷ lệ kiệt sức (73%), quá tải công việc (61%) và tăng cường độ lao động gián tiếp trong ngành công nghệ.",
+    url: "https://www.isaca.org/about-us/newsroom/press-releases/2025/73-percent-of-european-it-professionals-suffer-burnout-amid-rising-workloads-and-skills-shortages",
   },
   {
-    id: "shift-tracker-2025",
+    id: "cbs-news-amazon",
     marker: "[4]",
-    label: "Khảo sát thu nhập lao động Gig Economy (Shift Tracker 2025)",
-    usedFor: "Đa ứng dụng (58%), thời gian làm việc 10-12 tiếng/ngày, và chiết khấu nền tảng từ 27% đến 37%.",
+    label: "CBS News 2024: Công nhân Amazon bị chấn thương nhiều ở kho hàng",
+    usedFor: "Tỷ lệ chấn thương cao, không được nghỉ phép trả lương, kéo dài thời gian làm việc.",
+    url: "https://www.cbsnews.com/news/amazon-workers-injuries-warehouse-survey-unpaid-time-off/",
   },
   {
     id: "pwc-2025",

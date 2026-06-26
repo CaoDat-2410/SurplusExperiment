@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 
 const steps = [
   {
@@ -33,53 +33,45 @@ const steps = [
 
 export function LogicMap({ onNext }: { onNext: () => void }) {
   return (
-    <div className="flex h-full w-full flex-col px-16 pb-6 pt-10">
-      <header className="mb-6 flex items-baseline gap-4 border-b pb-3" style={{ borderColor: "var(--grid-line)" }}>
-        <span style={{ fontFamily: "var(--font-mono)", fontSize: 14, letterSpacing: "0.14em", color: "var(--amber-signal)" }}>
+    <div className="flex min-h-screen w-full flex-col px-4 md:px-16 pb-24 pt-10">
+      <header className="mb-6 flex flex-col md:flex-row md:items-baseline gap-4 border-b pb-3" style={{ borderColor: "var(--grid-line)" }}>
+        <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: "0.14em", color: "var(--amber-signal)" }}>
           BẢN ĐỒ LOGIC
         </span>
-        <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 44, lineHeight: 1, color: "var(--paper)" }}>
+        <h1 className="text-[28px] md:text-[44px]" style={{ fontFamily: "var(--font-display)", fontWeight: 800, lineHeight: 1, color: "var(--paper)" }}>
           CẤU TRÚC LẬP LUẬN CỦA BÀI
         </h1>
       </header>
 
-      <div className="flex min-h-0 flex-1 items-center">
-        <div className="flex w-full items-stretch gap-0">
+      <div className="flex flex-1 items-center">
+        <div className="flex w-full flex-col md:flex-row items-stretch gap-2 md:gap-0">
           {steps.map((s, i) => (
-            <div key={s.id} className="flex flex-1 items-stretch gap-0">
+            <div key={s.id} className="flex flex-col md:flex-row items-stretch flex-1">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, delay: i * 0.1, ease: "linear" }}
-                className="flex flex-1 flex-col justify-between p-5"
-                style={{
-                  border: `1px solid ${s.highlight ? "var(--amber-signal)" : "var(--grid-line)"}`,
-                  borderRadius: 4,
-                  background: s.highlight
-                    ? "color-mix(in srgb, var(--amber-signal) 8%, var(--ink))"
-                    : "color-mix(in srgb, var(--paper) 4%, var(--ink))",
-                }}
+                className="card-industrial flex flex-1 flex-col p-4 md:p-5 m-1"
+                style={{justifyContent: "space-between"}}
               >
                 <div
+                  className="card-number"
                   style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: 13,
+                    fontSize: 11,
                     letterSpacing: "0.06em",
-                    color: s.highlight ? "var(--amber-signal)" : "var(--grid-line)",
-                    marginBottom: 10,
                   }}
                 >
                   {String(s.id).padStart(2, "0")}
                 </div>
-                <div>
+                <div className="flex flex-col gap-2 flex-1 justify-center">
                   <div
+                    className="card-title"
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: 800,
-                      fontSize: 20,
+                      fontSize: 16,
                       lineHeight: 1.15,
-                      color: s.highlight ? "var(--amber-signal)" : "var(--paper)",
-                      marginBottom: 10,
                     }}
                   >
                     {s.text}
@@ -87,7 +79,7 @@ export function LogicMap({ onNext }: { onNext: () => void }) {
                   <div
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: 12,
+                      fontSize: 11,
                       color: "color-mix(in srgb, var(--paper) 60%, transparent)",
                       lineHeight: 1.5,
                     }}
@@ -98,23 +90,30 @@ export function LogicMap({ onNext }: { onNext: () => void }) {
               </motion.div>
 
               {/* connector arrow between steps */}
-              {i < steps.length - 1 && (
-                <div className="flex items-center px-2" style={{ color: "var(--grid-line)" }}>
-                  <ArrowRight size={18} />
-                </div>
-              )}
+              <div className="flex items-center px-2" style={{ color: "var(--grid-line)" }}>
+                {i < steps.length - 1 && (
+                  <>
+                    <div className="hidden md:flex">
+                      <ArrowRight size={18} />
+                    </div>
+                    <div className="flex md:hidden py-2">
+                      <ArrowDown size={18} />
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="mt-6 flex items-center justify-between">
-        <p style={{ fontFamily: "var(--font-body)", fontSize: 14, color: "color-mix(in srgb, var(--paper) 55%, transparent)" }}>
+      <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "color-mix(in srgb, var(--paper) 55%, transparent)" }}>
           Mỗi trạm trong bài tương ứng với một bước trong chuỗi lập luận này.
         </p>
         <button
           onClick={onNext}
-          className="svl-press focus-amber flex items-center gap-2 px-6 py-3"
+          className="svl-press focus-amber flex items-center justify-center gap-2 px-6 py-3 w-full md:w-auto"
           style={{
             fontFamily: "var(--font-mono)",
             fontSize: 13,

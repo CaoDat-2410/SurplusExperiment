@@ -24,26 +24,28 @@ export function Station03({ resetTick }: { resetTick: number }) {
 
   return (
     <StationLayout stationCode="TRẠM 03" title={relativeSection.title} subtitle="Kéo slider tự động hóa 0 → 100 · bấm số nguồn để xem chi tiết">
-      <div className="grid h-full grid-cols-12 gap-6">
-        <div className="col-span-7 flex flex-col gap-4">
-          <div className="min-h-0 flex-1">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
+        <div className="col-span-1 md:col-span-7 flex flex-col gap-4">
+          <div className="flex-1">
             <FactoryBlueprint automationLevel={automation} />
           </div>
-          <ControlSlider
-            label="Mức tự động hóa"
-            value={automation}
-            min={0}
-            max={100}
-            step={1}
-            unit="%"
-            description="Tăng năng suất lao động xã hội để rút ngắn thời gian lao động cần thiết."
-            onChange={setAutomation}
-          />
+          <div className="md:sticky md:bottom-0 z-10 pt-2" style={{ background: "var(--ink)" }}>
+            <ControlSlider
+              label="Mức tự động hóa"
+              value={automation}
+              min={0}
+              max={100}
+              step={1}
+              unit="%"
+              description="Tăng năng suất lao động xã hội để rút ngắn thời gian lao động cần thiết."
+              onChange={setAutomation}
+            />
+          </div>
         </div>
 
-        <div className="col-span-5 grid grid-cols-2 grid-rows-3 gap-4">
+        <div className="col-span-1 md:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto">
           <EvidenceCard eyebrow="PHẦN A: CƠ CHẾ LÝ THUYẾT"
-            sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="amber">
+            sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="paper">
             <Stat
               value="Thặng dư"
               unit="Tương đối"
@@ -57,12 +59,12 @@ export function Station03({ resetTick }: { resetTick: number }) {
           </EvidenceCard>
 
           <EvidenceCard eyebrow="PHẦN A: LAO ĐỘNG TẤT YẾU (t)"
-            sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="red">
+            sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="paper">
             <Stat value="Giảm t" unit="Thời gian tất yếu rút ngắn" note="Giá trị sức lao động giảm do giá trị tư liệu sinh hoạt giảm." />
           </EvidenceCard>
 
           <EvidenceCard eyebrow="PHẦN A: LAO ĐỘNG THẶNG DƯ (t')"
-            sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="amber">
+            sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="paper">
             <Stat
               value="Tăng t'"
               unit="Mở rộng thặng dư"
@@ -71,12 +73,12 @@ export function Station03({ resetTick }: { resetTick: number }) {
           </EvidenceCard>
 
           <EvidenceCard eyebrow="PHẦN A: NGÀY LÀM VIỆC"
-            sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="red">
+            sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="paper">
             <Stat value="Cố định" unit="Ngày làm việc không đổi" note="Phương pháp thực hiện mà không cần kéo dài ngày lao động." />
           </EvidenceCard>
 
           <EvidenceCard eyebrow={`PHẦN B: THỰC TIỄN · ${metric1.label.toUpperCase()}`}
-            sourceId="pwc-2025" sourceMarker={cite("pwc-2025")} onOpenSource={setOpenSource} color="teal">
+            sourceId="pwc-2025" sourceMarker={cite("pwc-2025")} onOpenSource={setOpenSource} color="paper">
             <Stat value={metric1.value} unit={metric1.description} note="Ứng dụng trợ lý ảo (GitHub Copilot) giúp lập trình viên viết code nhanh hơn." />
           </EvidenceCard>
         </div>

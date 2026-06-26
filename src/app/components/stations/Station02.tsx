@@ -26,31 +26,66 @@ export function Station02({ revealTick, resetTick }: { revealTick: number; reset
   const [openSource, setOpenSource] = useState<string | null>(null);
 
   const absoluteSection = theoryContent.find((s) => s.type === "absolute")!;
-  const [metric1, metric2] = absoluteSection.metrics; // ISACA 2025, Shift Tracker 2025
+  const [metric1, metric2] = absoluteSection.metrics;
 
   return (
     <StationLayout stationCode="TRẠM 02" title={absoluteSection.title} subtitle="Nhấn Space để reveal · bấm số nguồn để xem chi tiết">
-      <div className="grid h-full grid-cols-2 grid-rows-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4 md:gap-6 overflow-y-auto py-2">
         {/* ROW 1: LÝ THUYẾT CỐT LÕI */}
         <Reveal show={step >= 0}>
           <EvidenceCard eyebrow="PHẦN A: LÝ THUYẾT CỐT LÕI · CƠ CHẾ" color="teal">
-            <div className="flex h-full flex-col justify-center p-2">
-              <p style={{ fontFamily: "var(--font-body)", fontSize: 18, color: "var(--paper)", lineHeight: 1.6 }}>
+            <div className="flex h-full flex-col justify-center gap-4">
+              <p style={{ fontFamily: "var(--font-body)", fontSize: 16, color: "var(--paper)", lineHeight: 1.5 }}>
                 {absoluteSection.shortConcept}
               </p>
+              <div className="p-3" style={{ background: "color-mix(in srgb, var(--ink) 60%, transparent)", borderRadius: 4, border: "1px solid var(--grid-line)" }}>
+                {[
+                  "Ngày lao động ban đầu:   t = t₁ + t₂",
+                  "Ngày lao động sau (tăng):   t' = t₁ + t₂' (t₂' > t₂)",
+                  "",
+                  "t₁ — Lao động tất yếu (không đổi)",
+                  "t₂' — Lao động thặng dư (tăng lên)"
+                ].map((line, i) =>
+                  line === "" ? (
+                    <div key={i} style={{ height: 4 }} />
+                  ) : (
+                    <div
+                      key={i}
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 12,
+                        color: line.includes("=") ? "var(--amber-signal)" : "var(--paper)",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {line}
+                    </div>
+                  )
+                )}
+              </div>
             </div>
           </EvidenceCard>
         </Reveal>
 
         <Reveal show={step >= 1}>
-          <EvidenceCard eyebrow="PHẦN A: LÝ THUYẾT CỐT LÕI · CÔNG THỨC" color="paper">
-            <div className="flex h-full flex-col justify-center p-2 gap-4">
-              <div style={{ fontFamily: "var(--font-mono)", fontSize: 18, color: "var(--amber-signal)", background: "color-mix(in srgb, var(--ink) 80%, transparent)", border: "1px solid var(--grid-line)", borderRadius: 4, padding: "12px 16px", fontWeight: 700 }}>
-                Formula: {absoluteSection.formula}
+          <EvidenceCard eyebrow="PHẦN A: LÝ THUYẾT CỐT LÕI · CÁCH THỰC HIỆN" color="paper">
+            <div className="flex h-full flex-col justify-center gap-4">
+              <div>
+                <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 22, color: "var(--paper)", marginBottom: 4 }}>
+                  1. Kéo dài ngày lao động
+                </div>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: 15, color: "color-mix(in srgb, var(--paper) 70%, transparent)", lineHeight: 1.5 }}>
+                  Tăng số giờ làm việc mỗi ngày, mỗi tuần (làm thêm, tăng ca).
+                </p>
               </div>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: 15, color: "color-mix(in srgb, var(--paper) 70%, transparent)", lineHeight: 1.5 }}>
-                Bóc lột thặng dư tuyệt đối bằng cách kéo dài thời gian làm việc vượt quá thời gian tất yếu t₁ hoặc tăng cường độ lao động trong điều kiện lương khả biến không đổi.
-              </p>
+              <div className="border-t pt-4" style={{ borderColor: "var(--grid-line)" }}>
+                <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 22, color: "var(--paper)", marginBottom: 4 }}>
+                  2. Tăng cường độ lao động
+                </div>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: 15, color: "color-mix(in srgb, var(--paper) 70%, transparent)", lineHeight: 1.5 }}>
+                  Ép công nhân làm nhanh hơn, nhiều việc hơn trong cùng thời gian (hệ thống theo dõi, áp lực thời hạn).
+                </p>
+              </div>
             </div>
           </EvidenceCard>
         </Reveal>
@@ -80,17 +115,20 @@ export function Station02({ revealTick, resetTick }: { revealTick: number; reset
         <Reveal show={step >= 3}>
           <EvidenceCard
             eyebrow={`PHẦN B: THỰC TIỄN · ${metric2.label.toUpperCase()}`}
-            sourceId="shift-tracker-2025" sourceMarker={cite("shift-tracker-2025")} onOpenSource={setOpenSource}
-            color="amber"
+            sourceId="cbs-news-amazon" sourceMarker={cite("cbs-news-amazon")} onOpenSource={setOpenSource}
+            color="paper"
           >
             <div className="flex h-full flex-col justify-center">
-              <div style={{ fontFamily: "var(--font-display)", fontWeight: 950, fontSize: 64, lineHeight: 1, color: "var(--amber-signal)" }}>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 950, fontSize: 56, lineHeight: 1, color: "var(--amber-signal)" }}>
                 {step >= 3 ? (
-                  <div className="flex items-baseline gap-1">
-                    <Odometer value={10} decimals={0} />
-                    <span style={{ fontSize: 32, fontWeight: 700 }}>-</span>
-                    <Odometer value={12} decimals={0} />
-                    <span style={{ fontSize: 32, marginLeft: 2, fontWeight: 700 }}> giờ/ngày</span>
+                  <div className="flex flex-col items-start">
+                    <div className="flex items-baseline gap-1">
+                      <Odometer value={41} decimals={0} />
+                      <span style={{ fontSize: 28, fontWeight: 700 }}>% CHẤN THƯƠNG</span>
+                    </div>
+                    <div style={{ fontSize: 18, fontFamily: "var(--font-mono)", color: "var(--paper)", marginTop: 8 }}>
+                      69% nghỉ không lương
+                    </div>
                   </div>
                 ) : "—"}
               </div>
@@ -98,7 +136,7 @@ export function Station02({ revealTick, resetTick }: { revealTick: number; reset
                 {metric2.description}
               </p>
               <p style={{ fontFamily: "var(--font-body)", fontSize: 15, color: "color-mix(in srgb, var(--paper) 60%, transparent)" }}>
-                Tài xế giao hàng phải chạy nhiều ứng dụng và làm việc 10-12 tiếng mỗi ngày để bù đắp mức chiết khấu nền tảng chiếm từ 27% đến 37%.
+                Tỷ lệ chấn thương 6.6/100 người (gấp đôi ngành trung bình), hệ thống theo dõi ép làm nhanh hơn.
               </p>
             </div>
           </EvidenceCard>

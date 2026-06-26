@@ -79,22 +79,27 @@ export default function App() {
     }
   };
 
+  const isRevealStation = active === 3 || active === 5 || active === 7;
+
   return (
-    <div className="grid-bg relative flex h-screen w-full flex-col overflow-hidden" {...swipe}>
-      <div className="absolute right-4 top-4 z-30 flex gap-2">
-        {[
-          { icon: BookOpen, fn: () => goTo(6), label: "Minh bạch AI & nguồn" },
-          { icon: Maximize, fn: toggleFullscreen, label: "Toàn màn hình (F)" },
-          { icon: HelpCircle, fn: () => setHelp(true), label: "Trợ giúp (H)" },
-        ].map(({ icon: Icon, fn, label }) => (
-          <button key={label} onClick={fn} title={label} className="svl-press focus-amber p-2"
-            style={{ color: "var(--paper)", border: "1px solid var(--grid-line)", borderRadius: 4, background: "color-mix(in srgb, var(--ink) 80%, transparent)", cursor: "pointer" }}>
-            <Icon size={18} />
-          </button>
-        ))}
+    <div className="grid-bg relative flex min-h-screen w-full flex-col" {...swipe}>
+      <div className="sticky right-0 top-0 z-30 flex justify-between items-center gap-2 px-4 py-4 bg-gradient-to-b from-black/50 to-transparent">
+        <div></div>
+        <div className="flex gap-2">
+          {[
+            { icon: BookOpen, fn: () => goTo(6), label: "Minh bạch AI & nguồn" },
+            { icon: Maximize, fn: toggleFullscreen, label: "Toàn màn hình (F)" },
+            { icon: HelpCircle, fn: () => setHelp(true), label: "Trợ giúp (H)" },
+          ].map(({ icon: Icon, fn, label }) => (
+            <button key={label} onClick={fn} title={label} className="svl-press focus-amber p-2"
+              style={{ color: "var(--paper)", border: "1px solid var(--grid-line)", borderRadius: 4, background: "color-mix(in srgb, var(--ink) 80%, transparent)", cursor: "pointer" }}>
+              <Icon size={18} />
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div className="svl-scan scrollbar-thin scrollbar-thumb-hide relative min-h-0 flex-1 overflow-y-auto">
+      <div className="svl-scan scrollbar-thin flex-1 pb-20">
         <AnimatePresence mode="wait" custom={dir}>
           <motion.div
             key={active}
@@ -103,12 +108,30 @@ export default function App() {
             animate={{ x: 0, opacity: 1 }}
             exit={reduce ? { opacity: 0 } : { x: dir * -80, opacity: 0 }}
             transition={reduce ? { duration: 0.15 } : { duration: 0.4, ease: "linear" }}
-            className="absolute inset-0"
+            className="w-full"
           >
             {render()}
           </motion.div>
         </AnimatePresence>
       </div>
+
+      {isRevealStation && (
+        <button
+          onClick={reveal}
+          className="fixed bottom-20 right-4 z-30 svl-press focus-amber flex items-center justify-center gap-2 px-4 py-2 rounded-full shadow-lg"
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: 12,
+            color: "var(--ink)",
+            background: "var(--amber-signal)",
+            border: "none",
+            cursor: "pointer",
+            fontWeight: 700,
+          }}
+        >
+          NHẤN ĐỂ HIỆN NỘI DUNG
+        </button>
+      )}
 
       <BottomNav stations={NAV} current={active} onNavigate={goTo} />
 

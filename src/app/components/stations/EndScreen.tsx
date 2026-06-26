@@ -24,7 +24,7 @@ export function EndScreen({
   const [activeTab, setActiveTab] = useState<"policy" | "modern">("policy");
 
   return (
-    <div className="relative h-full w-full px-12 py-6 flex flex-col justify-between overflow-hidden">
+    <div className="relative min-h-full w-full px-4 md:px-12 py-4 md:py-6 flex flex-col">
       {/* Background Glow Effect */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
@@ -37,18 +37,18 @@ export function EndScreen({
       />
 
       {/* Header */}
-      <div className="relative z-10 flex items-center justify-between border-b pb-4 mb-2" style={{ borderColor: "var(--grid-line)" }}>
+      <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-4 mb-2" style={{ borderColor: "var(--grid-line)" }}>
         <div>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: "0.15em", color: "var(--amber-signal)", fontWeight: 700 }}>
             TỔNG KẾT THÍ NGHIỆM
           </span>
-          <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 32, color: "var(--paper)", lineHeight: 1.1 }}>
+          <h1 className="text-[24px] md:text-[32px]" style={{ fontFamily: "var(--font-display)", fontWeight: 900, color: "var(--paper)", lineHeight: 1.1 }}>
             KẾT LUẬN & ĐỊNH HƯỚNG CHÍNH SÁCH
           </h1>
         </div>
         <button
           onClick={onReset}
-          className="svl-press focus-amber flex items-center gap-2 px-4 py-2"
+          className="svl-press focus-amber flex items-center justify-center gap-2 px-4 py-2 w-full md:w-auto"
           style={{
             fontFamily: "var(--font-mono)",
             fontSize: 13,
@@ -65,20 +65,20 @@ export function EndScreen({
       </div>
 
       {/* Main Grid */}
-      <div className="grid h-full grid-cols-12 gap-8 items-center min-h-0 flex-1 relative z-10">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 flex-1 relative z-10 overflow-y-auto py-2">
         {/* Left Side: 4 Triết lý luận điểm (Reveal từng phần) */}
-        <div className="col-span-6 flex flex-col justify-center gap-5">
+        <div className="col-span-1 lg:col-span-6 flex flex-col gap-4 md:gap-5">
           <motion.div
             initial={false}
             animate={{ opacity: step >= 0 ? 1 : 0.1 }}
-            style={{ fontFamily: "var(--font-mono)", fontSize: 13, letterSpacing: "0.1em", color: "var(--amber-signal)", fontWeight: 700 }}
+            style={{ fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: "0.1em", color: "var(--amber-signal)", fontWeight: 700 }}
             className="flex items-center gap-2"
           >
             <Sparkles size={14} />
-            PHẦN A: LUẬN ĐIỂM TRIẾT LÕI (Space để reveal)
+            PHẦN A: LUẬN ĐIỂM TRIẾT LỖI
           </motion.div>
 
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             {finalReveals.map((block, i) => {
               const isAccent = i === 3;
               const isVisible = step >= i;
@@ -105,7 +105,7 @@ export function EndScreen({
                           style={{
                             fontFamily: isSymbol ? "var(--font-mono)" : "var(--font-display)",
                             fontWeight: 800,
-                            fontSize: isSymbol ? 30 : isHighlight ? 26 : 22,
+                            fontSize: isSymbol ? 24 : isHighlight ? 20 : 18,
                             color: isSymbol ? "var(--amber-signal)" : isHighlight ? "var(--amber-signal)" : "var(--paper)",
                             textShadow: isSymbol ? "0 0 12px rgba(227, 162, 60, 0.5)" : isHighlight ? "0 0 8px rgba(227, 162, 60, 0.3)" : "none",
                           }}
@@ -124,7 +124,7 @@ export function EndScreen({
             initial={false}
             animate={{ opacity: step >= 3 ? 0.8 : 0.1 }}
             transition={{ duration: 0.3 }}
-            className="text-[13px] border-t pt-4"
+            className="text-[13px] border-t pt-3 md:pt-4"
             style={{ borderColor: "var(--grid-line)", fontFamily: "var(--font-body)", color: "color-mix(in srgb, var(--paper) 70%, transparent)", lineHeight: 1.5 }}
           >
             Nếu tăng năng suất chỉ làm lợi cho giới chủ tư bản, sự bất bình đẳng xã hội sẽ ngày càng trầm trọng. Đây chính là gốc rễ của các cuộc khủng hoảng phân phối trong kinh tế hiện đại.
@@ -132,12 +132,12 @@ export function EndScreen({
         </div>
 
         {/* Right Side: Tabs (10 Chỉ báo chính sách / 6 hình thức hiện đại) */}
-        <div className="col-span-6 flex flex-col h-full justify-center max-h-[82vh]">
+        <div className="col-span-1 lg:col-span-6 flex flex-col gap-3 md:gap-4">
           {/* Tab buttons */}
-          <div className="flex gap-2 mb-3.5" style={{ fontFamily: "var(--font-mono)", fontSize: 12 }}>
+          <div className="flex flex-col sm:flex-row gap-2" style={{ fontFamily: "var(--font-mono)", fontSize: 12 }}>
             <button
               onClick={() => setActiveTab("policy")}
-              className="svl-press flex items-center gap-2 px-4 py-2 border rounded transition-all duration-200"
+              className="svl-press flex items-center justify-center gap-2 px-3 py-2 border rounded transition-all duration-200"
               style={{
                 cursor: "pointer",
                 background: activeTab === "policy" ? "var(--ink)" : "transparent",
@@ -146,11 +146,11 @@ export function EndScreen({
                 fontWeight: activeTab === "policy" ? 700 : 500,
               }}
             >
-              <Layers size={14} /> 10 CHỈ BÁO CHÍNH SÁCH
+              <Layers size={14} /> 10 CHỈ BÁO
             </button>
             <button
               onClick={() => setActiveTab("modern")}
-              className="svl-press flex items-center gap-2 px-4 py-2 border rounded transition-all duration-200"
+              className="svl-press flex items-center justify-center gap-2 px-3 py-2 border rounded transition-all duration-200"
               style={{
                 cursor: "pointer",
                 background: activeTab === "modern" ? "var(--ink)" : "transparent",
@@ -159,17 +159,17 @@ export function EndScreen({
                 fontWeight: activeTab === "modern" ? 700 : 500,
               }}
             >
-              <AlertTriangle size={14} /> 6 HÌNH THỨC HIỆN ĐẠI (3.1.3)
+              <AlertTriangle size={14} /> 6 HÌNH THỨC
             </button>
           </div>
 
           {/* Tab content area with scrollbar if needed */}
-          <div className="flex-1 overflow-y-auto pr-1 select-none">
+          <div className="overflow-y-auto pr-1 select-none">
             {activeTab === "policy" && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="grid grid-cols-2 gap-2.5"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-2.5"
               >
                 {policyIndicators.map((p, idx) => (
                   <div
@@ -202,7 +202,7 @@ export function EndScreen({
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="grid grid-cols-2 gap-2.5"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-2.5"
               >
                 {modernVariants.map((v, idx) => (
                   <div
