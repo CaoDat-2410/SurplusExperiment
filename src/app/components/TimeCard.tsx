@@ -25,44 +25,44 @@ export function TimeCard({ totalHours, necessaryHours, surplusHours, rate }: Tim
           backgroundPosition: "center",
         }}
       />
-      <div className="px-6 pb-6 pt-2">
-        <div className="mb-4 flex items-end justify-between">
+      <div className="px-8 pb-8 pt-3">
+        <div className="mb-5 flex items-end justify-between">
           <div>
-            <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: "0.08em", color: "var(--grid-line)" }}>
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, letterSpacing: "0.08em", color: "var(--grid-line)" }}>
               THẺ CHẤM CÔNG · s/v = t₂/t₁ × 100%
             </div>
-            <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 60, lineHeight: 1, color: "var(--ink)" }}>
+            <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 72, lineHeight: 1, color: "var(--ink)" }}>
               s/v = <Odometer value={rate} decimals={1} suffix="%" />
             </div>
           </div>
           <div className="text-right" style={{ fontFamily: "var(--font-mono)", color: "var(--ink)" }}>
-            <div style={{ fontSize: 12, color: "var(--grid-line)" }}>NGÀY LĐ (t)</div>
-            <div style={{ fontSize: 24 }}>
+            <div style={{ fontSize: 14, color: "var(--grid-line)" }}>NGÀY LĐ (t)</div>
+            <div style={{ fontSize: 32, fontWeight: 700 }}>
               <Odometer value={totalHours} decimals={1} suffix=" h" />
             </div>
           </div>
         </div>
 
-        <div className="relative h-16 w-full overflow-hidden" style={{ border: "1px solid var(--grid-line)", borderRadius: 4 }}>
+        <div className="relative h-20 w-full overflow-hidden" style={{ border: "1px solid var(--grid-line)", borderRadius: 4 }}>
           <div
-            className="absolute inset-y-0 left-0 flex items-center px-3"
+            className="absolute inset-y-0 left-0 flex items-center px-4"
             style={{ width: `${necessaryPct}%`, background: "var(--necessary-teal)", transition: "width 150ms linear" }}
           >
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--paper)", whiteSpace: "nowrap" }}>
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: 15, fontWeight: 600, color: "var(--paper)", whiteSpace: "nowrap" }}>
               t₁ cần thiết · {necessaryHours.toFixed(2)}h
             </span>
           </div>
           <div
-            className="absolute inset-y-0 right-0 flex items-center justify-end px-3"
+            className="absolute inset-y-0 right-0 flex items-center justify-end px-4"
             style={{ width: `${100 - necessaryPct}%`, background: "var(--surplus-red)", transition: "width 150ms linear" }}
           >
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--paper)", whiteSpace: "nowrap" }}>
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: 15, fontWeight: 600, color: "var(--paper)", whiteSpace: "nowrap" }}>
               t₂ thặng dư · {surplusHours.toFixed(2)}h
             </span>
           </div>
           <div
             className="absolute inset-y-0"
-            style={{ left: `${necessaryPct}%`, width: 3, background: "var(--amber-signal)", transform: "translateX(-50%)", transition: "left 150ms linear", boxShadow: "0 0 0 1px var(--ink)" }}
+            style={{ left: `${necessaryPct}%`, width: 4, background: "var(--amber-signal)", transform: "translateX(-50%)", transition: "left 150ms linear", boxShadow: "0 0 0 1px var(--ink)" }}
           />
         </div>
       </div>

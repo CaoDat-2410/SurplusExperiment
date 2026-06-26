@@ -41,13 +41,8 @@ export function Station03({ resetTick }: { resetTick: number }) {
           />
         </div>
 
-        <div className="col-span-5 grid grid-cols-2 grid-rows-3 gap-3">
-          <EvidenceCard eyebrow={metric1.label.toUpperCase()}
-            sourceId="pwc-2025" sourceMarker={cite("pwc-2025")} onOpenSource={setOpenSource} color="teal">
-            <Stat value={metric1.value} unit={metric1.description} note="Ứng dụng trợ lý ảo (GitHub Copilot) viết code." />
-          </EvidenceCard>
-
-          <EvidenceCard eyebrow="CƠ CHẾ LÝ THUYẾT"
+        <div className="col-span-5 grid grid-cols-2 grid-rows-3 gap-4">
+          <EvidenceCard eyebrow="PHẦN A: CƠ CHẾ LÝ THUYẾT"
             sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="amber">
             <Stat
               value="Thặng dư"
@@ -56,17 +51,17 @@ export function Station03({ resetTick }: { resetTick: number }) {
             />
           </EvidenceCard>
 
-          <EvidenceCard eyebrow="CÔNG THỨC TOÁN HỌC"
+          <EvidenceCard eyebrow="PHẦN A: CÔNG THỨC TOÁN HỌC"
             sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="paper">
-            <Stat value="Formula" unit={relativeSection.formula} note="Rút ngắn thời gian lao động tất yếu t, kéo dài t'." />
+            <Stat value="Formula" unit={relativeSection.formula} note="Rút ngắn thời gian lao động cần thiết t, kéo dài t'." />
           </EvidenceCard>
 
-          <EvidenceCard eyebrow="LĐ CẦN THIẾT (t)"
+          <EvidenceCard eyebrow="PHẦN A: LAO ĐỘNG TẤT YẾU (t)"
             sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="red">
             <Stat value="Giảm t" unit="Thời gian tất yếu rút ngắn" note="Giá trị sức lao động giảm do giá trị tư liệu sinh hoạt giảm." />
           </EvidenceCard>
 
-          <EvidenceCard eyebrow="LĐ THẶNG DƯ (t')"
+          <EvidenceCard eyebrow="PHẦN A: LAO ĐỘNG THẶNG DƯ (t')"
             sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="amber">
             <Stat
               value="Tăng t'"
@@ -75,9 +70,14 @@ export function Station03({ resetTick }: { resetTick: number }) {
             />
           </EvidenceCard>
 
-          <EvidenceCard eyebrow="ĐỘ DÀI NGÀY LÀM VIỆC"
+          <EvidenceCard eyebrow="PHẦN A: NGÀY LÀM VIỆC"
             sourceId="pdf-source" sourceMarker={cite("pdf-source")} onOpenSource={setOpenSource} color="red">
             <Stat value="Cố định" unit="Ngày làm việc không đổi" note="Phương pháp thực hiện mà không cần kéo dài ngày lao động." />
+          </EvidenceCard>
+
+          <EvidenceCard eyebrow={`PHẦN B: THỰC TIỄN · ${metric1.label.toUpperCase()}`}
+            sourceId="pwc-2025" sourceMarker={cite("pwc-2025")} onOpenSource={setOpenSource} color="teal">
+            <Stat value={metric1.value} unit={metric1.description} note="Ứng dụng trợ lý ảo (GitHub Copilot) giúp lập trình viên viết code nhanh hơn." />
           </EvidenceCard>
         </div>
       </div>
@@ -90,9 +90,9 @@ export function Station03({ resetTick }: { resetTick: number }) {
 function Stat({ value, unit, note }: { value: string; unit: string; note?: string }) {
   return (
     <div className="flex h-full flex-col justify-center">
-      <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 24, lineHeight: 1.1, color: "var(--paper)" }}>{value}</div>
-      <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "color-mix(in srgb, var(--paper) 60%, transparent)", marginTop: 2 }}>{unit}</div>
-      {note && <div style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "color-mix(in srgb, var(--paper) 70%, transparent)", marginTop: 4, lineHeight: 1.3 }}>{note}</div>}
+      <div style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 32, lineHeight: 1.1, color: "var(--paper)" }}>{value}</div>
+      <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "var(--amber-signal)", marginTop: 4, fontWeight: 700 }}>{unit}</div>
+      {note && <div style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "color-mix(in srgb, var(--paper) 75%, transparent)", marginTop: 6, lineHeight: 1.4 }}>{note}</div>}
     </div>
   );
 }

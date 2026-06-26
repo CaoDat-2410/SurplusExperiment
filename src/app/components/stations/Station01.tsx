@@ -26,30 +26,30 @@ function TheoryPopup({ onClose }: { onClose: () => void }) {
       onClick={onClose}
     >
       <div
-        className="card-paper w-[540px] p-7"
+        className="card-paper w-[580px] p-8"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
-          <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 24, color: "var(--ink)" }}>
+          <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 28, color: "var(--ink)" }}>
             LÝ THUYẾT GỐC — 3.1.2
           </span>
           <button onClick={onClose} className="focus-amber" style={{ color: "var(--surplus-red)", cursor: "pointer" }}>
-            <X size={20} />
+            <X size={24} />
           </button>
         </div>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: 15, color: "var(--ink)", lineHeight: 1.65, marginBottom: 16 }}>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: 16, color: "var(--ink)", lineHeight: 1.65, marginBottom: 16 }}>
           {essenceSection.shortConcept}
         </p>
         <div
-          className="mb-4 p-4"
+          className="mb-4 p-5"
           style={{ background: "var(--ink)", borderRadius: 4, border: "1px solid var(--grid-line)" }}
         >
           {[
             "Ngày lao động:   t = t₁ + t₂",
-            "t₁ — lao động cần thiết (phần được trả công)",
-            "t₂ — lao động thặng dư (phần bị chiếm đoạt)",
+            "t₁ — lao động tất yếu (phần tái tạo sức lao động)",
+            "t₂ — lao động thặng dư (phần dôi ra bị chiếm đoạt)",
             "",
-            "Công thức tỷ suất thặng dư:",
+            "Công thức tỷ suất thặng dư (m'):",
             essenceSection.formula,
           ].map((line, i) =>
             line === "" ? (
@@ -59,7 +59,7 @@ function TheoryPopup({ onClose }: { onClose: () => void }) {
                 key={i}
                 style={{
                   fontFamily: "var(--font-mono)",
-                  fontSize: 14,
+                  fontSize: 15,
                   color: line.includes("=") || line.startsWith("Công thức") ? "var(--amber-signal)" : "var(--paper)",
                   lineHeight: 1.7,
                 }}
@@ -69,7 +69,7 @@ function TheoryPopup({ onClose }: { onClose: () => void }) {
             )
           )}
         </div>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "color-mix(in srgb, var(--ink) 65%, transparent)" }}>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: 14, color: "color-mix(in srgb, var(--ink) 65%, transparent)" }}>
           Nguồn: Tài liệu PDF nhóm cung cấp [★]
         </p>
       </div>
@@ -77,40 +77,74 @@ function TheoryPopup({ onClose }: { onClose: () => void }) {
   );
 }
 
-// Card hiển thị các chỉ số thực tế
-function EssenceMetricsCard() {
+// Bảng chia 2 phần: Lý thuyết cốt lõi & Thực tiễn
+function EssenceSplitCard() {
   const [metric1, metric2] = essenceSection.metrics;
 
   return (
-    <div className="card-industrial p-4">
-      <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: "0.1em", color: "var(--amber-signal)", marginBottom: 10 }}>
-        SỐ LIỆU ĐO LƯỜNG CỐT LÕI
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        {/* Metric 1: Báo cáo Oxfam 2024 */}
-        <div className="p-3" style={{ borderLeft: "3px solid var(--surplus-red)", background: "color-mix(in srgb, var(--ink) 60%, transparent)", borderRadius: "0 4px 4px 0" }}>
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--grid-line)" }}>
-            {metric1.label}
+    <div className="grid grid-cols-2 gap-6 mt-4">
+      {/* SECTION A: LÝ THUYẾT CỐT LÕI */}
+      <div className="card-industrial p-6" style={{ background: "color-mix(in srgb, var(--ink) 60%, transparent)" }}>
+        <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, letterSpacing: "0.1em", color: "var(--amber-signal)", marginBottom: 12, fontWeight: 700 }}>
+          PHẦN A: LÝ THUYẾT CỐT LÕI
+        </div>
+        <div className="flex flex-col gap-4">
+          <div>
+            <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 24, color: "var(--paper)", marginBottom: 2 }}>
+              Tỷ suất giá trị thặng dư (m')
+            </div>
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: 16, color: "var(--amber-signal)", marginBottom: 4, fontWeight: 700 }}>
+              m' = (m / v) × 100%
+            </div>
+            <div style={{ fontFamily: "var(--font-body)", fontSize: 15, color: "color-mix(in srgb, var(--paper) 80%, transparent)", lineHeight: 1.5 }}>
+              Phản ánh trình độ bóc lột của tư bản đối với công nhân, cho biết tỷ lệ ngày lao động được phân chia giữa thời gian tất yếu và thặng dư.
+            </div>
           </div>
-          <div className="my-1 flex items-baseline" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 28, color: "var(--surplus-red)" }}>
-            <span>+</span>
-            <Odometer value={2000} decimals={0} suffix=" Tỷ USD" />
-          </div>
-          <div style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "var(--paper)", lineHeight: 1.45 }}>
-            {metric1.description}
+          <div className="border-t pt-3" style={{ borderColor: "var(--grid-line)" }}>
+            <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 24, color: "var(--paper)", marginBottom: 2 }}>
+              Khối lượng giá trị thặng dư (M)
+            </div>
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: 16, color: "var(--amber-signal)", marginBottom: 4, fontWeight: 700 }}>
+              M = m' × V
+            </div>
+            <div style={{ fontFamily: "var(--font-body)", fontSize: 15, color: "color-mix(in srgb, var(--paper) 80%, transparent)", lineHeight: 1.5 }}>
+              Phản ánh quy mô bóc lột của tư bản, tính bằng tích số giữa tỷ suất thặng dư và tổng tư bản khả biến được sử dụng (tổng quỹ lương V).
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Metric 2: Bloomberg Q1/2026 */}
-        <div className="p-3" style={{ borderLeft: "3px solid var(--necessary-teal)", background: "color-mix(in srgb, var(--ink) 60%, transparent)", borderRadius: "0 4px 4px 0" }}>
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--grid-line)" }}>
-            {metric2.label}
+      {/* SECTION B: THỰC TIỄN 2024-2026 */}
+      <div className="card-industrial p-6" style={{ background: "color-mix(in srgb, var(--ink) 60%, transparent)" }}>
+        <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, letterSpacing: "0.1em", color: "var(--amber-signal)", marginBottom: 12, fontWeight: 700 }}>
+          PHẦN B: THỰC TIỄN 2024-2026
+        </div>
+        <div className="flex flex-col gap-5">
+          {/* Báo cáo Oxfam 2024 */}
+          <div className="p-4" style={{ borderLeft: "4px solid var(--surplus-red)", background: "color-mix(in srgb, var(--ink) 40%, transparent)", borderRadius: "0 4px 4px 0" }}>
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--grid-line)", fontWeight: 700 }}>
+              {metric1.label.toUpperCase()}
+            </div>
+            <div className="my-2 flex items-baseline" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 44, color: "var(--surplus-red)", lineHeight: 1 }}>
+              <span>+</span>
+              <Odometer value={2000} decimals={0} suffix=" Tỷ USD" />
+            </div>
+            <div style={{ fontFamily: "var(--font-body)", fontSize: 15, color: "var(--paper)", lineHeight: 1.45 }}>
+              {metric1.description}
+            </div>
           </div>
-          <div className="my-1 flex items-baseline" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 28, color: "var(--necessary-teal)" }}>
-            <Odometer value={14.5} decimals={1} suffix="%" />
-          </div>
-          <div style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "var(--paper)", lineHeight: 1.45 }}>
-            {metric2.description}
+
+          {/* Bloomberg Q1/2026 */}
+          <div className="p-4" style={{ borderLeft: "4px solid var(--necessary-teal)", background: "color-mix(in srgb, var(--ink) 40%, transparent)", borderRadius: "0 4px 4px 0" }}>
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--grid-line)", fontWeight: 700 }}>
+              {metric2.label.toUpperCase()}
+            </div>
+            <div className="my-2 flex items-baseline" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 44, color: "var(--necessary-teal)", lineHeight: 1 }}>
+              <Odometer value={14.5} decimals={1} suffix="%" />
+            </div>
+            <div style={{ fontFamily: "var(--font-body)", fontSize: 15, color: "var(--paper)", lineHeight: 1.45 }}>
+              {metric2.description}
+            </div>
           </div>
         </div>
       </div>
@@ -156,12 +190,12 @@ export function Station01({ resetTick }: { resetTick: number }) {
               onClick={() => setShowTheory(true)}
               className="svl-press focus-amber flex items-center gap-2 px-4 py-2"
               style={{
-                fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: "0.06em",
+                fontFamily: "var(--font-mono)", fontSize: 13, letterSpacing: "0.06em",
                 color: "var(--amber-signal)", border: "1px solid var(--amber-signal)",
                 borderRadius: 4, cursor: "pointer",
               }}
             >
-              <BookOpen size={14} /> LÝ THUYẾT
+              <BookOpen size={16} /> LÝ THUYẾT CHI TIẾT
             </button>
           </div>
           <TimeCard
@@ -171,7 +205,7 @@ export function Station01({ resetTick }: { resetTick: number }) {
             rate={out.rate}
           />
           <MechanismBadge mechanism={mechanism} />
-          <EssenceMetricsCard />
+          <EssenceSplitCard />
         </div>
 
         {/* right: sliders */}
@@ -209,9 +243,9 @@ export function Station01({ resetTick }: { resetTick: number }) {
           <button
             onClick={() => { setState(DEFAULT); setMechanism("baseline"); prevRef.current = DEFAULT; }}
             className="svl-press focus-amber mt-1 flex w-fit items-center gap-2 px-4 py-2"
-            style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--paper)", border: "1px solid var(--grid-line)", borderRadius: 4, cursor: "pointer" }}
+            style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "var(--paper)", border: "1px solid var(--grid-line)", borderRadius: 4, cursor: "pointer" }}
           >
-            <RotateCcw size={15} /> Đặt lại (R)
+            <RotateCcw size={16} /> Đặt lại (R)
           </button>
         </div>
       </div>
