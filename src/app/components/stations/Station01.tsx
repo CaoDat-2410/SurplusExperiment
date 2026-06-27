@@ -180,7 +180,7 @@ export function Station01({ resetTick }: { resetTick: number }) {
   };
 
   return (
-    <StationLayout stationCode="TRẠM 01" title={essenceSection.title} subtitle="Mô phỏng công thức — tính từ thông số bạn nhập">
+    <StationLayout stationCode="PHẦN 1" title={essenceSection.title} subtitle="Mô phỏng công thức — tính từ thông số bạn nhập">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 overflow-y-auto py-2">
         {/* left: time card + formula + badge */}
         <div className="col-span-1 md:col-span-7 flex flex-col gap-4">

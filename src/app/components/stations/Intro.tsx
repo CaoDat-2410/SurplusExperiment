@@ -33,7 +33,7 @@ export function Intro({ onStart }: { onStart: () => void }) {
         <CornerDownLeft size={18} /> NHẤN ENTER ĐỂ BẮT ĐẦU
       </button>
       <div className="mt-8" style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--grid-line)" }}>
-        ← → chuyển trạm · Space hiện nội dung · R đặt lại · F toàn màn hình · H trợ giúp
+        ← → chuyển phần · Space hiện nội dung · R đặt lại · F toàn màn hình · H trợ giúp
       </div>
     </div>
   );

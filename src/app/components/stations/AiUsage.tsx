@@ -14,7 +14,7 @@ const rows = [
     tool: "Figma AI",
     purpose: "Hỗ trợ dựng wireframe theo mô tả",
     prompt: "“Thiết kế web app dạng bảng điều khiển công nghiệp về giá trị thặng dư”",
-    edits: "Sinh viên chỉnh layout, màu, spacing, thứ tự trạm",
+    edits: "Sinh viên chỉnh layout, màu, spacing, thứ tự các phần",
   },
   {
     id: "cursor",

@@ -14,13 +14,13 @@ import { EndScreen } from "./components/stations/EndScreen";
 
 const NAV = [
   { code: "MỞ ĐẦU", short: "Giới thiệu" },
-  { code: "BẢN ĐỒ", short: "Logic bài" },
-  { code: "TRẠM 01", short: "Bản chất" },
-  { code: "TRẠM 02", short: "Tuyệt đối" },
-  { code: "TRẠM 03", short: "Tương đối" },
-  { code: "TRẠM 04", short: "Siêu ngạch" },
+  { code: "LOGIC MAP", short: "Logic bài" },
+  { code: "PHẦN 1", short: "Bản chất" },
+  { code: "PHẦN 2", short: "Tuyệt đối" },
+  { code: "PHẦN 3", short: "Tương đối" },
+  { code: "PHẦN 4", short: "Siêu ngạch" },
   { code: "PHỤ LỤC", short: "Minh bạch AI" },
-  { code: "KẾT THÚC", short: "Tổng kết" },
+  { code: "TỔNG KẾT", short: "Tổng kết" },
 ];
 const TOTAL = NAV.length;
 
@@ -145,12 +145,12 @@ export default function App() {
               <button onClick={() => setHelp(false)} className="focus-amber" style={{ color: "var(--surplus-red)", cursor: "pointer" }}><X size={20} /></button>
             </div>
             <ul style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--ink)", lineHeight: 2 }}>
-              <li>← → — chuyển trạm</li>
+              <li>← → — chuyển phần</li>
               <li>Space / Enter — hiện nội dung tiếp theo</li>
-              <li>R — đặt lại trạm hiện tại</li>
+              <li>R — đặt lại phần hiện tại</li>
               <li>F — toàn màn hình</li>
               <li>H / ? — bảng này</li>
-              <li>Vuốt trái/phải — chuyển trạm (cảm ứng)</li>
+              <li>Vuốt trái/phải — chuyển phần (cảm ứng)</li>
             </ul>
           </div>
         </div>

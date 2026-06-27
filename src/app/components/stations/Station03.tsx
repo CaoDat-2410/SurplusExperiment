@@ -23,7 +23,7 @@ export function Station03({ resetTick }: { resetTick: number }) {
   const [metric1] = relativeSection.metrics; // PwC 2025
 
   return (
-    <StationLayout stationCode="TRẠM 03" title={relativeSection.title} subtitle="Kéo slider tự động hóa 0 → 100 · bấm số nguồn để xem chi tiết">
+    <StationLayout stationCode="PHẦN 3" title={relativeSection.title} subtitle="Kéo slider tự động hóa 0 → 100 · bấm số nguồn để xem chi tiết">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
         <div className="col-span-1 md:col-span-7 flex flex-col gap-4">
           <div className="flex-1">

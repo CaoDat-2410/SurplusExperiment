@@ -214,7 +214,7 @@ export function Station04({ revealTick, resetTick }: { revealTick: number; reset
   const isExtraActive = leaderProductivity > societyAvg;
 
   return (
-    <StationLayout stationCode="TRẠM 04" title={extraSection.title} subtitle="Space để reveal từng luận điểm → mô phỏng siêu ngạch tương tác">
+    <StationLayout stationCode="PHẦN 4" title={extraSection.title} subtitle="Space để reveal từng luận điểm → mô phỏng siêu ngạch tương tác">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 overflow-y-auto py-2">
         {/* Cột trái (7 cột): Reveals lý thuyết & Thực tiễn */}
         <div className="col-span-1 md:col-span-7 flex flex-col gap-4">
@@ -244,7 +244,7 @@ export function Station04({ revealTick, resetTick }: { revealTick: number; reset
                     style={{
                       fontFamily: isConnector ? "var(--font-mono)" : "var(--font-display)",
                       fontWeight: 800,
-                      fontSize: isConnector ? 18 : 16,
+                      fontSize: isConnector ? 24 : 22,
                       lineHeight: 1.1,
                       color: isConnector ? "var(--surplus-red)" : "var(--paper)",
                       marginRight: 10,
@@ -277,10 +277,10 @@ export function Station04({ revealTick, resetTick }: { revealTick: number; reset
             <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--grid-line)", fontWeight: 700, marginBottom: 6 }}>
               INSILICO MEDICINE
             </div>
-            <div style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 24, color: "var(--amber-signal)", lineHeight: 1.1 }}>
+            <div style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 32, color: "var(--amber-signal)", lineHeight: 1.1 }}>
               Rút ngắn <Odometer value={3} decimals={0} />-<Odometer value={6} decimals={0} /> năm còn <Odometer value={18} decimals={0} suffix=" tháng!" />
             </div>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: 14, color: "var(--paper)", marginTop: 6, lineHeight: 1.4 }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: 15, color: "var(--paper)", marginTop: 6, lineHeight: 1.4 }}>
               Ứng dụng AI giúp rút ngắn chu kỳ R&D Y sinh học thay vì 3-6 năm như quy trình tiêu chuẩn, mang lại thặng dư siêu ngạch vượt trội trước khi công nghệ được phổ biến xã hội.
             </p>
           </motion.div>

@@ -29,7 +29,7 @@ export function Station02({ revealTick, resetTick }: { revealTick: number; reset
   const [metric1, metric2] = absoluteSection.metrics;
 
   return (
-    <StationLayout stationCode="TRẠM 02" title={absoluteSection.title} subtitle="Nhấn Space để reveal · bấm số nguồn để xem chi tiết">
+    <StationLayout stationCode="PHẦN 2" title={absoluteSection.title} subtitle="Nhấn Space để reveal · bấm số nguồn để xem chi tiết">
       <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4 md:gap-6 overflow-y-auto py-2">
         {/* ROW 1: LÝ THUYẾT CỐT LÕI */}
         <Reveal show={step >= 0}>
@@ -40,11 +40,12 @@ export function Station02({ revealTick, resetTick }: { revealTick: number; reset
               </p>
               <div className="p-3" style={{ background: "color-mix(in srgb, var(--ink) 60%, transparent)", borderRadius: 4, border: "1px solid var(--grid-line)" }}>
                 {[
-                  "Ngày lao động ban đầu:   t = t₁ + t₂",
-                  "Ngày lao động sau (tăng):   t' = t₁ + t₂' (t₂' > t₂)",
+                  "Độ dài ngày lao động ban đầu:   t = t₁ + t₂",
+                  "Độ dài ngày lao động kéo dài:   t' = t₁ + t₂' (với t₂' > t₂)",
                   "",
-                  "t₁ — Lao động tất yếu (không đổi)",
-                  "t₂' — Lao động thặng dư (tăng lên)"
+                  "t₁ — Thời gian lao động tất yếu (không đổi)",
+                  "t₂ — Thời gian lao động thặng dư ban đầu",
+                  "t₂' — Thời gian lao động thặng dư sau khi kéo dài"
                 ].map((line, i) =>
                   line === "" ? (
                     <div key={i} style={{ height: 4 }} />
@@ -53,7 +54,7 @@ export function Station02({ revealTick, resetTick }: { revealTick: number; reset
                       key={i}
                       style={{
                         fontFamily: "var(--font-mono)",
-                        fontSize: 12,
+                        fontSize: 13,
                         color: line.includes("=") ? "var(--amber-signal)" : "var(--paper)",
                         lineHeight: 1.5,
                       }}

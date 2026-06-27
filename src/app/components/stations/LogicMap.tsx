@@ -34,7 +34,7 @@ export function LogicMap({ onNext }: { onNext: () => void }) {
     <div className="flex min-h-screen w-full flex-col px-4 md:px-16 pb-24 pt-10">
       <header className="mb-6 flex flex-col md:flex-row md:items-baseline gap-4 border-b pb-3" style={{ borderColor: "var(--grid-line)" }}>
         <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: "0.14em", color: "var(--amber-signal)" }}>
-          BẢN ĐỒ LOGIC
+          LOGIC MAP
         </span>
         <h1 className="text-[28px] md:text-[44px]" style={{ fontFamily: "var(--font-display)", fontWeight: 800, lineHeight: 1, color: "var(--paper)" }}>
           CẤU TRÚC LẬP LUẬN CỦA BÀI
@@ -50,7 +50,7 @@ export function LogicMap({ onNext }: { onNext: () => void }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, delay: i * 0.1, ease: "linear" }}
                 className="card-industrial flex flex-col p-4 md:p-5 m-1"
-                style={{ minHeight: 200 }}
+                style={{ minHeight: 240 }}
               >
                 <div
                   className="card-number"
@@ -69,9 +69,9 @@ export function LogicMap({ onNext }: { onNext: () => void }) {
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: 800,
-                      fontSize: 16,
+                      fontSize: 18,
                       lineHeight: 1.15,
-                      minHeight: 38,
+                      minHeight: 44,
                     }}
                   >
                     {s.text}
@@ -79,10 +79,10 @@ export function LogicMap({ onNext }: { onNext: () => void }) {
                   <div
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: 11,
+                      fontSize: 13,
                       color: "color-mix(in srgb, var(--paper) 60%, transparent)",
                       lineHeight: 1.5,
-                      minHeight: 48,
+                      minHeight: 64,
                     }}
                   >
                     {s.sub}
@@ -110,7 +110,7 @@ export function LogicMap({ onNext }: { onNext: () => void }) {
 
       <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-4">
         <p style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "color-mix(in srgb, var(--paper) 55%, transparent)" }}>
-          Mỗi trạm trong bài tương ứng với một bước trong chuỗi lập luận này.
+          Mỗi phần trong bài tương ứng với một bước trong chuỗi lập luận này.
         </p>
         <button
           onClick={onNext}
@@ -125,7 +125,7 @@ export function LogicMap({ onNext }: { onNext: () => void }) {
             cursor: "pointer",
           }}
         >
-          VÀO TRẠM 01 <ArrowRight size={15} />
+          VÀO PHẦN 1 <ArrowRight size={15} />
         </button>
       </div>
     </div>

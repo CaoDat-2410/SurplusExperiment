@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { RefreshCw, Sparkles, AlertTriangle, Layers, BookOpen } from "lucide-react";
+import { RefreshCw, Sparkles, AlertTriangle, Layers } from "lucide-react";
 import { useRevealStep } from "../lib/useDeck";
 import { policyIndicators, modernVariants } from "../data/theory";
 
@@ -40,7 +40,7 @@ export function EndScreen({
       <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-4 mb-2" style={{ borderColor: "var(--grid-line)" }}>
         <div>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: "0.15em", color: "var(--amber-signal)", fontWeight: 700 }}>
-            TỔNG KẾT THÍ NGHIỆM
+            TỔNG KẾT
           </span>
           <h1 className="text-[24px] md:text-[32px]" style={{ fontFamily: "var(--font-display)", fontWeight: 900, color: "var(--paper)", lineHeight: 1.1 }}>
             KẾT LUẬN & ĐỊNH HƯỚNG CHÍNH SÁCH
@@ -75,7 +75,7 @@ export function EndScreen({
             className="flex items-center gap-2"
           >
             <Sparkles size={14} />
-            PHẦN A: LUẬN ĐIỂM TRIẾT LỖI
+            PHẦN A: LUẬN ĐIỂM CỐT LÕI
           </motion.div>
 
           <div className="space-y-3 md:space-y-4">
@@ -105,7 +105,7 @@ export function EndScreen({
                           style={{
                             fontFamily: isSymbol ? "var(--font-mono)" : "var(--font-display)",
                             fontWeight: 800,
-                            fontSize: isSymbol ? 24 : isHighlight ? 20 : 18,
+                            fontSize: isSymbol ? 30 : isHighlight ? 26 : 22,
                             color: isSymbol ? "var(--amber-signal)" : isHighlight ? "var(--amber-signal)" : "var(--paper)",
                             textShadow: isSymbol ? "0 0 12px rgba(227, 162, 60, 0.5)" : isHighlight ? "0 0 8px rgba(227, 162, 60, 0.3)" : "none",
                           }}
@@ -134,7 +134,7 @@ export function EndScreen({
         {/* Right Side: Tabs (10 Chỉ báo chính sách / 6 hình thức hiện đại) */}
         <div className="col-span-1 lg:col-span-6 flex flex-col gap-3 md:gap-4">
           {/* Tab buttons */}
-          <div className="flex flex-col sm:flex-row gap-2" style={{ fontFamily: "var(--font-mono)", fontSize: 12 }}>
+          <div className="flex flex-col sm:flex-row gap-2" style={{ fontFamily: "var(--font-mono)", fontSize: 13 }}>
             <button
               onClick={() => setActiveTab("policy")}
               className="svl-press flex items-center justify-center gap-2 px-3 py-2 border rounded transition-all duration-200"
@@ -187,10 +187,10 @@ export function EndScreen({
                     >
                       {idx + 1}
                     </div>
-                    <div style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: 13, color: "var(--paper)" }}>
+                    <div style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: 14, color: "var(--paper)" }}>
                       {p.label}
                     </div>
-                    <div style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "color-mix(in srgb, var(--paper) 60%, transparent)", lineHeight: 1.3, marginTop: 3 }}>
+                    <div style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "color-mix(in srgb, var(--paper) 60%, transparent)", lineHeight: 1.3, marginTop: 3 }}>
                       {p.meaning}
                     </div>
                   </div>
@@ -220,10 +220,10 @@ export function EndScreen({
                     >
                       {idx + 1}
                     </div>
-                    <div style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: 13, color: "var(--paper)", marginBottom: 4 }}>
+                    <div style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: 14, color: "var(--paper)", marginBottom: 4 }}>
                       {v.form}
                     </div>
-                    <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--amber-signal)", lineHeight: 1.3 }}>
+                    <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--amber-signal)", lineHeight: 1.3 }}>
                       → {v.link}
                     </div>
                   </div>
