@@ -1,78 +1,238 @@
-import { useRef } from "react";
-import { motion, useInView } from "motion/react";
-import { RefreshCw, Sparkles, Lightbulb, Target } from "lucide-react";
+import { useState } from "react";
+import { motion } from "motion/react";
+import { RefreshCw, Sparkles, AlertTriangle, Layers } from "lucide-react";
+import { useRevealStep } from "../lib/useDeck";
+import { policyIndicators, modernVariants } from "../data/theory";
 
-const takeaways = [
-  { text: "Giá trị thặng dư là phần giá trị mới vượt quá tiền lương — phần bị nhà tư bản chiếm đoạt trong sản xuất.", icon: Sparkles, highlight: "Giá trị thặng dư" },
-  { text: "Tư bản mở rộng giá trị thặng dư bằng kéo dài giờ làm (tuyệt đối) hoặc tăng năng suất (tương đối) và các hình thức hiện đại khác.", icon: Target, highlight: "kéo dài giờ làm" },
-  { text: "Trong kinh tế hiện đại, vấn đề lớn không phải là có năng suất tăng hay không — mà là thành quả năng suất được phân phối cho ai.", icon: Lightbulb, highlight: "phân phối cho ai" },
+const finalReveals = [
+  ["Năng suất lao động tăng", "≠", "Tiền lương tăng tương ứng"],
+  ["Mức lương thực tế tăng", "≠", "Lao động hưởng phần lớn hơn"],
+  ["Vấn đề cốt lõi không phải:", "Có nên tăng năng suất hay không?"],
+  ["Vấn đề cốt lõi là:", "AI LÀ NGƯỜI THỤ HƯỞNG TĂNG TRƯỞNG?"],
 ];
 
-function TakeawayCard({ item, index }: { item: typeof takeaways[0]; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const Icon = item.icon;
+export function EndScreen({
+  revealTick,
+  resetTick,
+  onReset,
+}: {
+  revealTick: number;
+  resetTick: number;
+  onReset: () => void;
+}) {
+  const step = useRevealStep(4, revealTick, resetTick);
+  const [activeTab, setActiveTab] = useState<"policy" | "modern">("policy");
 
   return (
-    <motion.div ref={ref} initial={{ opacity: 0, x: -40, y: 20 }} animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}} transition={{ duration: 0.6, delay: index * 0.15 }} className="flex items-start gap-3 sm:gap-5">
-      <motion.div className="shrink-0" initial={{ scale: 0, rotate: -180 }} animate={isInView ? { scale: 1, rotate: 0 } : {}} transition={{ delay: index * 0.15 + 0.1, type: "spring", stiffness: 250 }}>
-        <div style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: "clamp(32px, 6vw, 48px)", lineHeight: 1, color: "var(--amber-signal)", textShadow: "0 0 20px rgba(227, 162, 60, 0.5)" }}>
-          {index + 1}
+    <div className="relative min-h-full w-full px-4 md:px-12 py-4 md:py-6 flex flex-col">
+      {/* Background Glow Effect */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+        style={{
+          background: "radial-gradient(ellipse at 50% 30%, rgba(227, 162, 60, 0.04) 0%, transparent 60%)",
+        }}
+      />
+
+      {/* Header */}
+      <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-4 mb-2" style={{ borderColor: "var(--grid-line)" }}>
+        <div>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: "0.15em", color: "var(--amber-signal)", fontWeight: 700 }}>
+            TỔNG KẾT
+          </span>
+          <h1 className="text-[24px] md:text-[32px]" style={{ fontFamily: "var(--font-display)", fontWeight: 900, color: "var(--paper)", lineHeight: 1.1 }}>
+            KẾT LUẬN & ĐỊNH HƯỚNG CHÍNH SÁCH
+          </h1>
         </div>
-      </motion.div>
+        <button
+          onClick={onReset}
+          className="svl-press focus-amber flex items-center justify-center gap-2 px-4 py-2 w-full md:w-auto"
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: 13,
+            color: "var(--ink)",
+            background: "var(--amber-signal)",
+            border: "none",
+            borderRadius: 4,
+            cursor: "pointer",
+            fontWeight: 700,
+          }}
+        >
+          <RefreshCw size={14} /> CHẠY LẠI (R)
+        </button>
+      </div>
 
-      <motion.div className="flex-1 p-3 sm:p-5 relative" style={{ background: "linear-gradient(145deg, rgba(21, 38, 43, 0.95) 0%, rgba(12, 20, 25, 0.98) 100%)", border: "1px solid var(--grid-line)", borderRadius: 8, borderLeft: "3px solid var(--amber-signal)" }} whileHover={{ borderColor: "var(--amber-signal)" }} initial={{ scale: 0.95 }} animate={isInView ? { scale: 1 } : {}} transition={{ delay: index * 0.15 + 0.2 }}>
-        <motion.div className="absolute top-2 sm:top-3 right-2 sm:right-3" initial={{ opacity: 0, scale: 0 }} animate={isInView ? { opacity: 1, scale: 1 } : {}} transition={{ delay: index * 0.15 + 0.4 }}>
-          <Icon size={16} className="sm:w-[18px] sm:h-[18px]" style={{ color: "var(--amber-signal)" }} />
-        </motion.div>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(12px, 2vw, 15px)", color: "var(--paper)", lineHeight: 1.6, paddingRight: 24 }}>
-          {item.text.split(item.highlight).map((part, i) => (
-            <span key={i}>{i > 0 && <span style={{ color: "var(--amber-signal)", fontWeight: 700 }}>{item.highlight}</span>}{part}</span>
-          ))}
-        </p>
-      </motion.div>
-    </motion.div>
-  );
-}
+      {/* Main Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 flex-1 relative z-10 overflow-y-auto py-2">
+        {/* Left Side: 4 Triết lý luận điểm (Reveal từng phần) */}
+        <div className="col-span-1 lg:col-span-6 flex flex-col gap-4 md:gap-5">
+          <motion.div
+            initial={false}
+            animate={{ opacity: step >= 0 ? 1 : 0.1 }}
+            style={{ fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: "0.1em", color: "var(--amber-signal)", fontWeight: 700 }}
+            className="flex items-center gap-2"
+          >
+            <Sparkles size={14} />
+            PHẦN A: LUẬN ĐIỂM CỐT LÕI
+          </motion.div>
 
-export function EndScreen({ onReset }: { onReset: () => void }) {
-  const headerRef = useRef<HTMLDivElement>(null);
-  const isHeaderInView = useInView(headerRef, { once: true });
-  const questionRef = useRef<HTMLDivElement>(null);
-  const isQuestionInView = useInView(questionRef, { once: true });
-  const buttonRef = useRef<HTMLButtonElement>(null);
+          <div className="space-y-3 md:space-y-4">
+            {finalReveals.map((block, i) => {
+              const isAccent = i === 3;
+              const isVisible = step >= i;
 
-  return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-6 sm:gap-8 lg:gap-10 px-4 sm:px-8 md:px-12 lg:px-24 text-center relative overflow-y-auto py-4">
-      <motion.div className="absolute inset-0 pointer-events-none" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }} style={{ background: "radial-gradient(ellipse at 50% 30%, rgba(227, 162, 60, 0.08) 0%, transparent 50%)" }} />
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0.08, x: -8 }}
+                  transition={{ duration: 0.4 }}
+                  className="pl-4"
+                  style={{
+                    borderLeft: `2.5px solid ${isAccent ? "var(--amber-signal)" : "var(--grid-line)"}`,
+                  }}
+                >
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                    {block.map((line, j) => {
+                      const isSymbol = line === "≠";
+                      const isHighlight = isAccent && j === 1;
 
-      <motion.div ref={headerRef} initial={{ opacity: 0, y: -30, scale: 0.9 }} animate={isHeaderInView ? { opacity: 1, y: 0, scale: 1 } : {}} transition={{ duration: 0.7 }} className="relative">
-        <div style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: "clamp(28px, 6vw, 56px)", lineHeight: 1.1, color: "var(--paper)", textShadow: "0 0 40px rgba(227, 162, 60, 0.2)" }}>
-          HOÀN THÀNH THÍ NGHIỆM
+                      return (
+                        <span
+                          key={j}
+                          style={{
+                            fontFamily: isSymbol ? "var(--font-mono)" : "var(--font-display)",
+                            fontWeight: 800,
+                            fontSize: isSymbol ? 30 : isHighlight ? 26 : 22,
+                            color: isSymbol ? "var(--amber-signal)" : isHighlight ? "var(--amber-signal)" : "var(--paper)",
+                            textShadow: isSymbol ? "0 0 12px rgba(227, 162, 60, 0.5)" : isHighlight ? "0 0 8px rgba(227, 162, 60, 0.3)" : "none",
+                          }}
+                        >
+                          {line}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <motion.div
+            initial={false}
+            animate={{ opacity: step >= 3 ? 0.8 : 0.1 }}
+            transition={{ duration: 0.3 }}
+            className="text-[13px] border-t pt-3 md:pt-4"
+            style={{ borderColor: "var(--grid-line)", fontFamily: "var(--font-body)", color: "color-mix(in srgb, var(--paper) 70%, transparent)", lineHeight: 1.5 }}
+          >
+            Nếu tăng năng suất chỉ làm lợi cho giới chủ tư bản, sự bất bình đẳng xã hội sẽ ngày càng trầm trọng. Đây chính là gốc rễ của các cuộc khủng hoảng phân phối trong kinh tế hiện đại.
+          </motion.div>
         </div>
-      </motion.div>
 
-      <motion.div className="w-full max-w-2xl sm:max-w-3xl text-left" initial={{ opacity: 0, y: 30 }} animate={isHeaderInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.3 }}>
-        <div style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(11px, 1.8vw, 13px)", letterSpacing: "0.14em", color: "var(--amber-signal)", marginBottom: 20, display: "flex", alignItems: "center", gap: 8 }}>
-          <Sparkles size={14} className="sm:w-4 sm:h-4" />
-          3 ĐIỀU CẦN NHỚ
+        {/* Right Side: Tabs (10 Chỉ báo chính sách / 6 hình thức hiện đại) */}
+        <div className="col-span-1 lg:col-span-6 flex flex-col gap-3 md:gap-4">
+          {/* Tab buttons */}
+          <div className="flex flex-col sm:flex-row gap-2" style={{ fontFamily: "var(--font-mono)", fontSize: 13 }}>
+            <button
+              onClick={() => setActiveTab("policy")}
+              className="svl-press flex items-center justify-center gap-2 px-3 py-2 border rounded transition-all duration-200"
+              style={{
+                cursor: "pointer",
+                background: activeTab === "policy" ? "var(--ink)" : "transparent",
+                borderColor: activeTab === "policy" ? "var(--amber-signal)" : "var(--grid-line)",
+                color: activeTab === "policy" ? "var(--amber-signal)" : "var(--paper)",
+                fontWeight: activeTab === "policy" ? 700 : 500,
+              }}
+            >
+              <Layers size={14} /> 10 CHỈ BÁO
+            </button>
+            <button
+              onClick={() => setActiveTab("modern")}
+              className="svl-press flex items-center justify-center gap-2 px-3 py-2 border rounded transition-all duration-200"
+              style={{
+                cursor: "pointer",
+                background: activeTab === "modern" ? "var(--ink)" : "transparent",
+                borderColor: activeTab === "modern" ? "var(--amber-signal)" : "var(--grid-line)",
+                color: activeTab === "modern" ? "var(--amber-signal)" : "var(--paper)",
+                fontWeight: activeTab === "modern" ? 700 : 500,
+              }}
+            >
+              <AlertTriangle size={14} /> 6 HÌNH THỨC
+            </button>
+          </div>
+
+          {/* Tab content area with scrollbar if needed */}
+          <div className="overflow-y-auto pr-1 select-none">
+            {activeTab === "policy" && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="grid grid-cols-1 sm:grid-cols-2 gap-2.5"
+              >
+                {policyIndicators.map((p, idx) => (
+                  <div
+                    key={p.id}
+                    className="card-industrial p-3 relative overflow-hidden"
+                    style={{
+                      background: "color-mix(in srgb, var(--paper) 3%, var(--ink))",
+                      border: "1px solid var(--grid-line)",
+                      borderRadius: 4,
+                    }}
+                  >
+                    <div
+                      className="absolute top-1.5 right-1.5 w-4 h-4 flex items-center justify-center rounded-full text-[9px] font-bold"
+                      style={{ background: "rgba(227, 162, 60, 0.15)", color: "var(--amber-signal)", fontFamily: "var(--font-mono)" }}
+                    >
+                      {idx + 1}
+                    </div>
+                    <div style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: 14, color: "var(--paper)" }}>
+                      {p.label}
+                    </div>
+                    <div style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "color-mix(in srgb, var(--paper) 60%, transparent)", lineHeight: 1.3, marginTop: 3 }}>
+                      {p.meaning}
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            )}
+
+            {activeTab === "modern" && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="grid grid-cols-1 sm:grid-cols-2 gap-2.5"
+              >
+                {modernVariants.map((v, idx) => (
+                  <div
+                    key={v.id}
+                    className="card-industrial p-3 relative overflow-hidden"
+                    style={{
+                      background: "color-mix(in srgb, var(--paper) 3%, var(--ink))",
+                      border: "1px solid var(--grid-line)",
+                      borderRadius: 4,
+                    }}
+                  >
+                    <div
+                      className="absolute top-1.5 right-1.5 w-4 h-4 flex items-center justify-center rounded-full text-[9px] font-bold"
+                      style={{ background: "rgba(235, 94, 85, 0.15)", color: "var(--surplus-red)", fontFamily: "var(--font-mono)" }}
+                    >
+                      {idx + 1}
+                    </div>
+                    <div style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: 14, color: "var(--paper)", marginBottom: 4 }}>
+                      {v.form}
+                    </div>
+                    <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--amber-signal)", lineHeight: 1.3 }}>
+                      → {v.link}
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            )}
+          </div>
         </div>
-        <div className="flex flex-col gap-3 sm:gap-5">
-          {takeaways.map((item, i) => (<TakeawayCard key={i} item={item} index={i} />))}
-        </div>
-      </motion.div>
-
-      <motion.div ref={questionRef} initial={{ opacity: 0, y: 20 }} animate={isQuestionInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.6 }} className="relative">
-        <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px, 2.5vw, 17px)", maxWidth: 600, color: "color-mix(in srgb, var(--paper) 75%, transparent)", lineHeight: 1.65 }}>
-          Câu hỏi còn lại: nếu năng suất tăng, làm thế nào để thành quả đó được
-          <strong style={{ color: "var(--amber-signal)", fontWeight: 700, textShadow: "0 0 15px rgba(227, 162, 60, 0.5)" }}> phân phối công bằng hơn?</strong>
-        </p>
-      </motion.div>
-
-      <motion.button ref={buttonRef} onClick={onReset} initial={{ opacity: 0, scale: 0.8 }} animate={isQuestionInView ? { opacity: 1, scale: 1 } : {}} transition={{ delay: 0.8 }} whileHover={{ scale: 1.03, boxShadow: "0 0 40px rgba(227, 162, 60, 0.4)" }} whileTap={{ scale: 0.97 }} className="svl-press focus-amber flex items-center gap-2 sm:gap-3 px-5 sm:px-8 py-3 sm:py-4 cursor-pointer" style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(12px, 2vw, 14px)", letterSpacing: "0.1em", color: "var(--ink)", background: "var(--amber-signal)", border: "none", borderRadius: 6 }}>
-        <RefreshCw size={16} className="sm:w-[18px] sm:h-[18px]" /> 
-        CHẠY LẠI THÍ NGHIỆM
-      </motion.button>
+      </div>
     </div>
   );
 }

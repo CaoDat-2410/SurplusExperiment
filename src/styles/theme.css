@@ -217,11 +217,24 @@
   border: 1px solid var(--grid-line);
   border-radius: 4px;
   background: rgba(236, 227, 211, 0.04);
-  transition: transform 120ms linear, border-color 120ms linear;
+  transition: transform 120ms linear, border-color 120ms linear, background-color 120ms linear;
 }
 .card-industrial:hover {
   transform: translateY(-2px);
   border-color: var(--amber-signal);
+  background: color-mix(in srgb, var(--amber-signal) 15%, rgba(236, 227, 211, 0.04));
+}
+.card-industrial .card-number {
+  color: var(--grid-line);
+}
+.card-industrial:hover .card-number {
+  color: var(--amber-signal);
+}
+.card-industrial .card-title {
+  color: var(--paper);
+}
+.card-industrial:hover .card-title {
+  color: var(--amber-signal);
 }
 .card-paper {
   border: 1px solid var(--grid-line);

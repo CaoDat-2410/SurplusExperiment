@@ -9,7 +9,6 @@ interface EvidenceCardProps {
   onOpenSource?: (id: string) => void;
   color?: "red" | "teal" | "amber" | "paper";
   children: ReactNode;
-  className?: string;
 }
 
 const colorMap: Record<string, string> = {
@@ -27,12 +26,11 @@ export function EvidenceCard({
   onOpenSource,
   color = "paper",
   children,
-  className = "",
 }: EvidenceCardProps) {
   return (
-    <div className={"card-industrial flex h-full min-h-[160px] flex-col p-4 sm:min-h-[180px] lg:min-h-0 " + className}>
-      <div className="mb-2 flex items-start justify-between gap-2">
-        <span style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(12px, 3vw, 14px)", letterSpacing: "0.06em", color: colorMap[color] }}>
+    <div className="card-industrial flex h-full flex-col p-6">
+      <div className="mb-10 flex items-center justify-between">
+        <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: "0.06em", color: colorMap[color] }}>
           {eyebrow}
         </span>
         {sourceId && sourceMarker && onOpenSource && (
@@ -40,11 +38,11 @@ export function EvidenceCard({
         )}
       </div>
       {title && (
-        <div style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "clamp(14px, 3.4vw, 16px)", color: "var(--paper)", marginBottom: 8 }}>
+        <div style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: 14, color: "var(--paper)", marginBottom: 6 }}>
           {title}
         </div>
       )}
-      <div className="min-h-0 flex-1">{children}</div>
+      <div className="min-h-0 flex-1 mt-2">{children}</div>
     </div>
   );
 }

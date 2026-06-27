@@ -9,24 +9,18 @@ import { Station01 } from "./components/stations/Station01";
 import { Station02 } from "./components/stations/Station02";
 import { Station03 } from "./components/stations/Station03";
 import { Station04 } from "./components/stations/Station04";
-import { Station05 } from "./components/stations/Station05";
 import { AiUsage } from "./components/stations/AiUsage";
 import { EndScreen } from "./components/stations/EndScreen";
 
 const NAV = [
-  // LÝ THUYẾT
   { code: "MỞ ĐẦU", short: "Giới thiệu" },
-  { code: "BẢN ĐỒ", short: "Logic bài" },
-  { code: "TRẠM 01", short: "Cỗ máy" },
-  // DẪN CHỨNG
-  { code: "TRẠM 02", short: "Dữ liệu" },
-  { code: "TRẠM 03", short: "Việt Nam" },
-  { code: "TRẠM 04", short: "Thặng dư" },
-  // KẾT LUẬN
-  { code: "TRẠM 05", short: "Kết luận" },
-  // PHỤ LỤC
+  { code: "LOGIC MAP", short: "Logic bài" },
+  { code: "PHẦN 1", short: "Bản chất" },
+  { code: "PHẦN 2", short: "Tuyệt đối" },
+  { code: "PHẦN 3", short: "Tương đối" },
+  { code: "PHẦN 4", short: "Siêu ngạch" },
   { code: "PHỤ LỤC", short: "Minh bạch AI" },
-  { code: "KẾT THÚC", short: "Tổng kết" },
+  { code: "TỔNG KẾT", short: "Tổng kết" },
 ];
 const TOTAL = NAV.length;
 
@@ -46,8 +40,14 @@ export default function App() {
     setActive(next);
   }, []);
 
-  const next = useCallback(() => goTo(lastRef.current + 1), [goTo]);
-  const prev = useCallback(() => goTo(lastRef.current - 1), [goTo]);
+  const next = useCallback(() => {
+    goTo(lastRef.current + 1);
+  }, [goTo]);
+
+  const prev = useCallback(() => {
+    goTo(lastRef.current - 1);
+  }, [goTo]);
+
   const reveal = useCallback(() => setRevealTick((t) => t + 1), []);
   const reset = useCallback(() => setResetTick((t) => t + 1), []);
   const restart = useCallback(() => {
@@ -72,31 +72,34 @@ export default function App() {
       case 2: return <Station01 resetTick={resetTick} />;
       case 3: return <Station02 revealTick={revealTick} resetTick={resetTick} />;
       case 4: return <Station03 resetTick={resetTick} />;
-      case 5: return <Station05 />;
-      case 6: return <Station04 revealTick={revealTick} resetTick={resetTick} />;
-      case 7: return <AiUsage />;
-      case 8: return <EndScreen onReset={restart} />;
+      case 5: return <Station04 revealTick={revealTick} resetTick={resetTick} />;
+      case 6: return <AiUsage />;
+      case 7: return <EndScreen revealTick={revealTick} resetTick={resetTick} onReset={restart} />;
       default: return null;
     }
   };
 
+  const isRevealStation = active === 3 || active === 5 || active === 7;
+
   return (
-    <div className="grid-bg relative flex h-dvh w-full flex-col overflow-hidden" {...swipe}>
-      {/* Top buttons */}
-      <div className="absolute right-2 sm:right-4 top-2 sm:top-4 z-30 flex gap-1 sm:gap-2">
-        {[
-          { icon: BookOpen, fn: () => goTo(7), label: "Minh bạch AI & nguồn" },
-          { icon: Maximize, fn: toggleFullscreen, label: "Toàn màn hình (F)" },
-          { icon: HelpCircle, fn: () => setHelp(true), label: "Trợ giúp (H)" },
-        ].map(({ icon: Icon, fn, label }) => (
-          <button key={label} onClick={fn} title={label} className="svl-press focus-amber p-1.5 sm:p-2"
-            style={{ color: "var(--paper)", border: "1px solid var(--grid-line)", borderRadius: 4, background: "color-mix(in srgb, var(--ink) 80%, transparent)", cursor: "pointer" }}>
-            <Icon size={16} className="sm:w-[18px] sm:h-[18px]" />
-          </button>
-        ))}
+    <div className="grid-bg relative flex min-h-screen w-full flex-col" {...swipe}>
+      <div className="sticky right-0 top-0 z-30 flex justify-between items-center gap-2 px-4 py-4 bg-gradient-to-b from-black/50 to-transparent">
+        <div></div>
+        <div className="flex gap-2">
+          {[
+            { icon: BookOpen, fn: () => goTo(6), label: "Minh bạch AI & nguồn" },
+            { icon: Maximize, fn: toggleFullscreen, label: "Toàn màn hình (F)" },
+            { icon: HelpCircle, fn: () => setHelp(true), label: "Trợ giúp (H)" },
+          ].map(({ icon: Icon, fn, label }) => (
+            <button key={label} onClick={fn} title={label} className="svl-press focus-amber p-2"
+              style={{ color: "var(--paper)", border: "1px solid var(--grid-line)", borderRadius: 4, background: "color-mix(in srgb, var(--ink) 80%, transparent)", cursor: "pointer" }}>
+              <Icon size={18} />
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div className="svl-scan scrollbar-thin scrollbar-thumb-hide relative min-h-0 flex-1 overflow-y-auto">
+      <div className="svl-scan scrollbar-thin flex-1 pb-20">
         <AnimatePresence mode="wait" custom={dir}>
           <motion.div
             key={active}
@@ -105,31 +108,49 @@ export default function App() {
             animate={{ x: 0, opacity: 1 }}
             exit={reduce ? { opacity: 0 } : { x: dir * -80, opacity: 0 }}
             transition={reduce ? { duration: 0.15 } : { duration: 0.4, ease: "linear" }}
-            className="absolute inset-0"
+            className="w-full"
           >
             {render()}
           </motion.div>
         </AnimatePresence>
       </div>
 
+      {isRevealStation && (
+        <button
+          onClick={reveal}
+          className="fixed bottom-20 right-4 z-30 svl-press focus-amber flex items-center justify-center gap-2 px-4 py-2 rounded-full shadow-lg"
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: 12,
+            color: "var(--ink)",
+            background: "var(--amber-signal)",
+            border: "none",
+            cursor: "pointer",
+            fontWeight: 700,
+          }}
+        >
+          NHẤN ĐỂ HIỆN NỘI DUNG
+        </button>
+      )}
+
       <BottomNav stations={NAV} current={active} onNavigate={goTo} />
 
       {help && (
-        <div className="absolute inset-0 z-40 flex items-center justify-center p-4"
+        <div className="absolute inset-0 z-40 flex items-center justify-center"
           style={{ background: "color-mix(in srgb, var(--ink) 92%, transparent)" }}
           onClick={() => setHelp(false)}>
-          <div className="card-paper w-full max-w-sm sm:max-w-md p-4 sm:p-6" onClick={(e) => e.stopPropagation()}>
+          <div className="card-paper w-96 p-6" onClick={(e) => e.stopPropagation()}>
             <div className="mb-3 flex items-center justify-between">
-              <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(20px, 1.8vw, 26px)", color: "var(--ink)" }}>Điều khiển</span>
-              <button onClick={() => setHelp(false)} className="focus-amber" style={{ color: "var(--surplus-red)", cursor: "pointer" }}><X size={18} /></button>
+              <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 26, color: "var(--ink)" }}>Điều khiển</span>
+              <button onClick={() => setHelp(false)} className="focus-amber" style={{ color: "var(--surplus-red)", cursor: "pointer" }}><X size={20} /></button>
             </div>
-            <ul style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(12px, 1.8vw, 13px)", color: "var(--ink)", lineHeight: 1.8 }}>
-              <li>← → — chuyển trạm</li>
+            <ul style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--ink)", lineHeight: 2 }}>
+              <li>← → — chuyển phần</li>
               <li>Space / Enter — hiện nội dung tiếp theo</li>
-              <li>R — đặt lại trạm hiện tại</li>
+              <li>R — đặt lại phần hiện tại</li>
               <li>F — toàn màn hình</li>
               <li>H / ? — bảng này</li>
-              <li>Vuốt trái/phải — chuyển trạm (cảm ứng)</li>
+              <li>Vuốt trái/phải — chuyển phần (cảm ứng)</li>
             </ul>
           </div>
         </div>
